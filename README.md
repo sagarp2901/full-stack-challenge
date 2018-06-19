@@ -19,9 +19,9 @@ Design a web application that allows employees to submit feedback toward each ot
 * High level description of design and technologies used
 * Server side API (using a programming language and/or framework of your choice)
   * Implementation of at least 3 API calls
-  * Most full stack web developers at Paytm Labs currently use Node.js and/or Ruby on Rails on the server (with MySQL for the database), but feel free to use other tech if you prefer
+  * Most full stack web developers at Paytm Labs currently use Ruby on Rails, Java or Node.js on the server(with MySQL for the database), but feel free to use other tech if you prefer
 * Web app
-  * Implementation of 2-5 web pages using a modern web framework (preferably React) that talks to server side
+  * Implementation of 2-5 web pages using a modern web framework (e.g. React or Angular) that talks to server side
     * This should integrate with your API, but it's fine to use static responses for some of it 
 * Document all assumptions made
 * Complete solutions aren't required, but what you do submit needs to run.

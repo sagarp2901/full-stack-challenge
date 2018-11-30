@@ -1,0 +1,21 @@
+<div class="employees-container">
+  <ul>
+    <li *ngFor="let employee of employees">
+      <mat-card>
+        <div
+          class="name-container"
+          mat-raised-button
+          [routerLink]="['/employee-profile', employee.id]"
+        >
+          {{ employee.name }}
+        </div>
+        <div class="icons-container">
+          <i class="material-icons"> edit </i>
+          <i class="material-icons"> delete_forever </i>
+        </div>
+      </mat-card>
+    </li>
+  </ul>
+</div>
+
+<button mat-raised-button color="primary">Add New Employee</button>

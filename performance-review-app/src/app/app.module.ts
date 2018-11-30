@@ -1,27 +1,34 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
 
 // Material
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule} from '@angular/material';
-import { HomeComponent } from './components/home/home.component';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MatButtonModule, MatCardModule } from "@angular/material";
+import { HomeComponent } from "./components/home/home.component";
+import { EmployeeViewComponent } from "./components/employee-view/employee-view.component";
+import { AdminViewComponent } from "./components/admin-view/admin-view.component";
+import { EmployeeProfileComponent } from './components/employee-profile/employee-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    EmployeeViewComponent,
+    AdminViewComponent,
+    EmployeeProfileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     // Material
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

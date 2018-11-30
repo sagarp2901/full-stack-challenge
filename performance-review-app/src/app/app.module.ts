@@ -6,11 +6,16 @@ import { AppComponent } from "./app.component";
 
 // Material
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MatButtonModule, MatCardModule } from "@angular/material";
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatDialogModule
+} from "@angular/material";
 import { HomeComponent } from "./components/home/home.component";
 import { EmployeeViewComponent } from "./components/employee-view/employee-view.component";
 import { AdminViewComponent } from "./components/admin-view/admin-view.component";
-import { EmployeeProfileComponent } from './components/employee-profile/employee-profile.component';
+import { EmployeeProfileComponent } from "./components/employee-profile/employee-profile.component";
+import { AddEmployeeDialogComponent } from "./components/add-employee-dialog/add-employee-dialog.component";
 
 @NgModule({
   declarations: [
@@ -18,7 +23,8 @@ import { EmployeeProfileComponent } from './components/employee-profile/employee
     HomeComponent,
     EmployeeViewComponent,
     AdminViewComponent,
-    EmployeeProfileComponent
+    EmployeeProfileComponent,
+    AddEmployeeDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -26,8 +32,10 @@ import { EmployeeProfileComponent } from './components/employee-profile/employee
     BrowserAnimationsModule,
     // Material
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatDialogModule
   ],
+  entryComponents: [AddEmployeeDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

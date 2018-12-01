@@ -13,26 +13,43 @@ export class AdminViewComponent implements OnInit {
   constructor(private adminService: AdminService, public dialog: MatDialog) {}
 
   ngOnInit() {
-    this.adminService.getEmployees().subscribe((data: any) => {
-      this.employees = data;
-    });
+    this.getEmployees();
   }
 
   openAddDialog(): void {
     const dialogRef = this.dialog.open(AddEmployeeDialogComponent, {
+      data: { mode: "add" },
       width: "250px"
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log("The dialog was closed");
+      this.getEmployees();
     });
   }
 
-  updateEmployeeName() {}
+  openEditDialog(employee): void {
+    const dialogRef = this.dialog.open(AddEmployeeDialogComponent, {
+      data: { mode: "edit", employee },
+      width: "250px"
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("The dialog was closed");
+      this.getEmployees();
+    });
+  }
+
+  getEmployees() {
+    this.adminService.getEmployees().subscribe((data: any) => {
+      this.employees = data;
+    });
+  }
 
   deleteEmployee(employeeId) {
     this.adminService.deleteEmployee(employeeId).subscribe(data => {
       console.log("Deleted successfully");
+      this.getEmployees();
     });
   }
 }

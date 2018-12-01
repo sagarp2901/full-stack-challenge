@@ -42,6 +42,11 @@ export class AdminService {
     return this.http.post(url, employee);
   }
 
+  updateEmployee(employee) {
+    let url = `${this.baseUrl}/update/${employee._id}`;
+    return this.http.post(url, employee);
+  }
+
   deleteEmployee(id) {
     let url = `${this.baseUrl}/delete/${id}`;
     return this.http.get(url);

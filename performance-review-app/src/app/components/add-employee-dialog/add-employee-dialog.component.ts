@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { MatDialogRef } from "@angular/material";
+import { Component, OnInit, OnDestroy, Inject } from "@angular/core";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { AdminService } from "../../services/admin.service";
 
 @Component({
@@ -9,12 +9,23 @@ import { AdminService } from "../../services/admin.service";
 })
 export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private adminService: AdminService,
     public dialogRef: MatDialogRef<AddEmployeeDialogComponent>
   ) {}
 
   employeeName;
-  ngOnInit() {}
+  rating;
+  reviews;
+  ngOnInit() {
+    if (this.data.mode == "edit") this.setUpdateData();
+  }
+
+  setUpdateData() {
+    this.employeeName = this.data.employee.name;
+    this.rating = this.data.employee.rating;
+    this.reviews = this.data.employee.reviews;
+  }
 
   updateName(value) {
     this.employeeName = value;
@@ -24,11 +35,24 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
     // Create a new employee with new name and add it to the list.
     let newEmployee = {
       name: this.employeeName,
-      rating: "",
+      rating: this.rating,
       reviews: []
     };
     this.adminService.addEmployee(newEmployee).subscribe(data => {
       console.log("Added successfully");
+    });
+    this.dialogRef.close();
+  }
+
+  updateEmployee() {
+    let updatedEmployee = {
+      _id: this.data.employee._id,
+      name: this.employeeName,
+      rating: this.rating,
+      reviews: []
+    };
+    this.adminService.updateEmployee(updatedEmployee).subscribe(data => {
+      console.log("Updated successfully");
     });
     this.dialogRef.close();
   }

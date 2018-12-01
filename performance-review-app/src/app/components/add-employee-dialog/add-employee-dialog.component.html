@@ -1,6 +1,18 @@
-<h2>Add an Employee</h2>
+<h2>{{ data.mode == "add" ? "Add" : "Edit" }} an Employee</h2>
 
 <mat-form-field class="example-full-width">
-  <input #name matInput placeholder="Name" (keyup)="updateName(name.value)" />
+  <input #name matInput placeholder="Name" [(ngModel)]="employeeName" />
 </mat-form-field>
-<button mat-raised-button (click)="addEmployee()">Create Employee</button>
+<mat-form-field class="example-full-width">
+  <input #name matInput placeholder="Rating" [(ngModel)]="rating" />
+</mat-form-field>
+<button *ngIf="data.mode == 'add'" mat-raised-button (click)="addEmployee()">
+  Create Employee
+</button>
+<button
+  *ngIf="data.mode == 'edit'"
+  mat-raised-button
+  (click)="updateEmployee()"
+>
+  Update Employee
+</button>

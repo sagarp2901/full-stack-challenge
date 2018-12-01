@@ -9,7 +9,9 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
   MatButtonModule,
   MatCardModule,
-  MatDialogModule
+  MatDialogModule,
+  MatInputModule,
+  MatFormFieldModule
 } from "@angular/material";
 import { HomeComponent } from "./components/home/home.component";
 import { EmployeeViewComponent } from "./components/employee-view/employee-view.component";
@@ -33,7 +35,9 @@ import { AddEmployeeDialogComponent } from "./components/add-employee-dialog/add
     // Material
     MatButtonModule,
     MatCardModule,
-    MatDialogModule
+    MatDialogModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   entryComponents: [AddEmployeeDialogComponent],
   providers: [],

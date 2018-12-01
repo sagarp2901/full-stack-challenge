@@ -10,8 +10,12 @@
           {{ employee.name }}
         </div>
         <div class="icons-container">
-          <i class="material-icons"> edit </i>
-          <i class="material-icons"> delete_forever </i>
+          <i class="material-icons" (click)="updateEmployeeName(employee)">
+            edit
+          </i>
+          <i class="material-icons" (click)="deleteEmployee(employee.id)">
+            delete_forever
+          </i>
         </div>
       </mat-card>
     </li>

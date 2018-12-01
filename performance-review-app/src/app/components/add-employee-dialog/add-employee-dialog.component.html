@@ -1,3 +1,6 @@
-<p>
-  add-employee-dialog works!
-</p>
+<h2>Add an Employee</h2>
+
+<mat-form-field class="example-full-width">
+  <input #name matInput placeholder="Name" (keyup)="updateName(name.value)" />
+</mat-form-field>
+<button mat-raised-button (click)="addEmployee()">Create Employee</button>

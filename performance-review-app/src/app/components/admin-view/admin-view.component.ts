@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AdminService } from "../../services/admin.service";
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { MatDialog } from "@angular/material";
 import { AddEmployeeDialogComponent } from "src/app/components/add-employee-dialog/add-employee-dialog.component";
 
 @Component({
@@ -24,5 +24,11 @@ export class AdminViewComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log("The dialog was closed");
     });
+  }
+
+  updateEmployeeName() {}
+
+  deleteEmployee(employeeId) {
+    this.adminService.deleteEmployee(employeeId);
   }
 }

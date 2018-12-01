@@ -1,2 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+.main-bg {
+  height: 100%;
+  background-image: linear-gradient(
+    -90deg,
+    rgb(20, 114, 177),
+    rgb(112, 173, 201)
+  );
+}

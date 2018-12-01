@@ -4,25 +4,72 @@
     <mat-expansion-panel *ngFor="let employee of employees">
       <mat-expansion-panel-header>
         <mat-panel-title> {{ employee.name }} </mat-panel-title>
-        <mat-panel-description> {{ employee.rating }} </mat-panel-description>
+        <!--
+          <mat-panel-description
+            >Rating: {{ employee.rating }}
+          </mat-panel-description>
+        -->
       </mat-expansion-panel-header>
-      <div class="icons-container">
-        <i class="material-icons" (click)="openEditDialog(employee)"> edit </i>
-        <i class="material-icons" (click)="deleteEmployee(employee._id)">
-          delete_forever
-        </i>
+      <div class="reviews-header">
+        <h3>Reviews:</h3>
+        <div class="icons-container">
+          <button mat-button (click)="openEditDialog(employee)">
+            <i class="material-icons edit"> edit </i>
+          </button>
+          <button mat-button (click)="deleteEmployee(employee._id)">
+            <i class="material-icons delete"> delete_forever </i>
+          </button>
+        </div>
       </div>
-      Reviews:
+
       <ul>
-        <li *ngFor="let review of employee.reviews">{{ review }}</li>
+        <li *ngFor="let review of employee.reviews">
+          <span *ngIf="!review.isEdit">{{ review.text }}</span>
+          <mat-form-field *ngIf="review.isEdit">
+            <input matInput [(ngModel)]="review.text" />
+          </mat-form-field>
+          <i
+            *ngIf="!review.isEdit"
+            class="material-icons edit"
+            (click)="toggleReviewEdit(review)"
+          >
+            edit
+          </i>
+          <i
+            *ngIf="!review.isEdit"
+            class="material-icons delete"
+            (click)="deleteReview(review, employee)"
+          >
+            close
+          </i>
+          <i
+            *ngIf="review.isEdit"
+            (click)="updateReview(review, employee)"
+            class="material-icons check"
+          >
+            check
+          </i>
+        </li>
       </ul>
       <mat-form-field>
-        <input matInput placeholder="Add a review" />
+        <input
+          matInput
+          placeholder="Add a review"
+          [(ngModel)]="currentReview.text"
+        />
       </mat-form-field>
+      <button mat-button (click)="saveReview(employee)">
+        <i class="material-icons check"> check </i>
+      </button>
     </mat-expansion-panel>
   </mat-accordion>
 
-  <button mat-raised-button color="primary" (click)="openAddDialog()">
+  <button
+    class="add-employee-btn"
+    mat-raised-button
+    color="primary"
+    (click)="openAddDialog()"
+  >
     Add New Employee
   </button>
 </div>

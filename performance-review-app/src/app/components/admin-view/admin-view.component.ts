@@ -10,10 +10,41 @@ import { AddEmployeeDialogComponent } from "src/app/components/add-employee-dial
 })
 export class AdminViewComponent implements OnInit {
   employees: any[];
+  currentReview = { text: "", isEdit: false };
+  isReviewEditable = false;
   constructor(private adminService: AdminService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.getEmployees();
+  }
+
+  saveReview(employee) {
+    if (!this.currentReview) return;
+    employee.reviews.push(this.currentReview);
+    this.currentReview = { text: "", isEdit: false };
+    this.adminService.updateEmployee(employee).subscribe(data => {
+      console.log("Review saved successfully");
+    });
+  }
+
+  updateReview(review, employee) {
+    review.isEdit = false;
+    this.adminService.updateEmployee(employee).subscribe(data => {
+      console.log("Review saved successfully");
+    });
+  }
+
+  deleteReview(review, employee) {
+    employee.reviews = employee.reviews.filter(rev => {
+      return review.text !== rev.text;
+    });
+    this.adminService.updateEmployee(employee).subscribe(data => {
+      console.log("Review Deleted successfully");
+    });
+  }
+
+  toggleReviewEdit(review) {
+    review.isEdit = true;
   }
 
   openAddDialog(): void {

@@ -1,31 +1,18 @@
 .employees-container {
-  li {
-    list-style: none;
+  mat-accordion {
     margin-bottom: 20px;
-
-    mat-card {
+    .icons-container {
+      width: 5%;
       display: flex;
-      align-items: center;
       justify-content: space-between;
 
-      .name-container {
-        width: 95%;
+      i {
         cursor: pointer;
       }
-
-      .icons-container {
-        width: 5%;
-        display: flex;
-        justify-content: space-between;
-
-        i {
-          cursor: pointer;
-        }
-      }
     }
+  }
 
-    mat-card:hover {
-      background-color: #3f51b5;
-    }
+  button {
+    margin-top: 30px;
   }
 }

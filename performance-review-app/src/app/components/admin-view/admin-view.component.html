@@ -1,27 +1,27 @@
 <div class="employees-container">
-  <ul>
-    <li *ngFor="let employee of employees">
-      <mat-card>
-        <div
-          class="name-container"
-          mat-raised-button
-          [routerLink]="['/employee-profile', employee._id]"
-        >
-          {{ employee.name }}
-        </div>
-        <div class="icons-container">
-          <i class="material-icons" (click)="openEditDialog(employee)">
-            edit
-          </i>
-          <i class="material-icons" (click)="deleteEmployee(employee._id)">
-            delete_forever
-          </i>
-        </div>
-      </mat-card>
-    </li>
-  </ul>
-</div>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let employee of employees">
+      <mat-expansion-panel-header>
+        <mat-panel-title> {{ employee.name }} </mat-panel-title>
+        <mat-panel-description> {{ employee.rating }} </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="icons-container">
+        <i class="material-icons" (click)="openEditDialog(employee)"> edit </i>
+        <i class="material-icons" (click)="deleteEmployee(employee._id)">
+          delete_forever
+        </i>
+      </div>
+      Reviews:
+      <ul>
+        <li *ngFor="let review of employee.reviews">{{ review }}</li>
+      </ul>
+      <mat-form-field>
+        <input matInput placeholder="Add a review" />
+      </mat-form-field>
+    </mat-expansion-panel>
+  </mat-accordion>
 
-<button mat-raised-button color="primary" (click)="openAddDialog()">
-  Add New Employee
-</button>
+  <button mat-raised-button color="primary" (click)="openAddDialog()">
+    Add New Employee
+  </button>
+</div>

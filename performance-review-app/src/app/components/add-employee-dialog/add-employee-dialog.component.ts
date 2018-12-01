@@ -23,12 +23,13 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
   addEmployee() {
     // Create a new employee with new name and add it to the list.
     let newEmployee = {
-      id: this.adminService.getEmployees().length + 1,
       name: this.employeeName,
-      rating: 0,
+      rating: "",
       reviews: []
     };
-    this.adminService.addEmployee(newEmployee);
+    this.adminService.addEmployee(newEmployee).subscribe(data => {
+      console.log("Added successfully");
+    });
     this.dialogRef.close();
   }
 

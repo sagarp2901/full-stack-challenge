@@ -1,10 +1,13 @@
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root"
 })
 export class AdminService {
-  employees = [
+  baseUrl = "http://localhost:4000/employees";
+  /*employees = [
     { id: 0, name: "Luke", reviews: ["good", "jedi", "ametuer"], rating: 5 },
     { id: 1, name: "Yoda", reviews: ["master", "very powerful"], rating: 5 },
     {
@@ -20,27 +23,27 @@ export class AdminService {
       reviews: ["great guy", "intimidates with his code"],
       rating: 5
     }
-  ];
+  ];*/
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   getEmployees() {
-    return this.employees;
+    let url = `${this.baseUrl}`;
+    return this.http.get(url);
   }
 
   getEmployeeById(id) {
-    return this.employees.find(employee => {
-      return employee.id == id;
-    });
+    let url = `${this.baseUrl}/${id}`;
+    return this.http.get(url);
   }
 
   addEmployee(employee) {
-    this.employees.push(employee);
+    let url = `${this.baseUrl}/add`;
+    return this.http.post(url, employee);
   }
 
-  deleteEmployee(employeeId) {
-    this.employees = this.employees.filter(employee => {
-      return employee.id !== employeeId;
-    });
+  deleteEmployee(id) {
+    let url = `${this.baseUrl}/delete/${id}`;
+    return this.http.get(url);
   }
 }

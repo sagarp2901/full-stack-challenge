@@ -13,7 +13,9 @@ export class AdminViewComponent implements OnInit {
   constructor(private adminService: AdminService, public dialog: MatDialog) {}
 
   ngOnInit() {
-    this.employees = this.adminService.getEmployees();
+    this.adminService.getEmployees().subscribe((data: any) => {
+      this.employees = data;
+    });
   }
 
   openAddDialog(): void {
@@ -29,6 +31,8 @@ export class AdminViewComponent implements OnInit {
   updateEmployeeName() {}
 
   deleteEmployee(employeeId) {
-    this.adminService.deleteEmployee(employeeId);
+    this.adminService.deleteEmployee(employeeId).subscribe(data => {
+      console.log("Deleted successfully");
+    });
   }
 }

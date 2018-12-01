@@ -8,7 +8,7 @@ import { AdminService } from "../../services/admin.service";
   styleUrls: ["./employee-profile.component.scss"]
 })
 export class EmployeeProfileComponent implements OnInit {
-  id: number;
+  id: string;
   profile: any;
 
   constructor(
@@ -18,8 +18,10 @@ export class EmployeeProfileComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.id = +params["id"];
-      this.profile = this.adminService.getEmployeeById(this.id);
+      this.id = params["id"];
+      this.adminService.getEmployeeById(this.id).subscribe(data => {
+        this.profile = data;
+      });
     });
   }
 }

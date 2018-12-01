@@ -5,7 +5,7 @@
         <div
           class="name-container"
           mat-raised-button
-          [routerLink]="['/employee-profile', employee.id]"
+          [routerLink]="['/employee-profile', employee._id]"
         >
           {{ employee.name }}
         </div>
@@ -13,7 +13,7 @@
           <i class="material-icons" (click)="updateEmployeeName(employee)">
             edit
           </i>
-          <i class="material-icons" (click)="deleteEmployee(employee.id)">
+          <i class="material-icons" (click)="deleteEmployee(employee._id)">
             delete_forever
           </i>
         </div>

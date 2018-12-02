@@ -8,9 +8,20 @@
 
 .admin-container {
   background-color: #eeeeee;
+  height: 100vh;
 }
 
 .employees-container {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+
+  app-employee {
+    width: 345px;
+  }
+}
+
+@media only screen and (min-width: 500px) {
+  .employees-container {
+    padding-left: 100px;
+  }
 }

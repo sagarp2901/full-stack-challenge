@@ -14,7 +14,7 @@ export class EmployeeComponent implements OnInit {
 
   @Output() employeeUpdated = new EventEmitter();
 
-  employees: Employee[];
+  @Input() employees: Employee[];
 
   constructor(private adminService: AdminService, public dialog: MatDialog) {}
 
@@ -29,7 +29,7 @@ export class EmployeeComponent implements OnInit {
 
   openDialog(mode, employee): void {
     const dialogRef = this.dialog.open(AddEmployeeDialogComponent, {
-      data: { mode, employee },
+      data: { mode, employee, employees: this.employees },
       width: "250px"
     });
 

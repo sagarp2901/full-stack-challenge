@@ -8,11 +8,11 @@
     </mat-toolbar-row>
   </mat-toolbar>
   <div class="employees-container">
-    <div *ngFor="let employee of employees">
-      <app-employee
-        [employee]="employee"
-        (employeeUpdated)="getUpdatedEmployees($event)"
-      ></app-employee>
-    </div>
+    <app-employee
+      *ngFor="let employee of employees"
+      [employee]="employee"
+      [employees]="employees"
+      (employeeUpdated)="getUpdatedEmployees($event)"
+    ></app-employee>
   </div>
 </div>

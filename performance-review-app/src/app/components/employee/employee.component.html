@@ -1,11 +1,47 @@
 <mat-card>
-  <h4>{{ employee.name }}</h4>
+  <h3>{{ employee.name }}</h3>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Reviews </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-list role="list">
+        <mat-list-item role="listitem" *ngFor="let review of employee.reviews">
+          {{ review.text }}
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Assigned Reviewers </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-list role="list">
+        <mat-list-item
+          role="listitem"
+          *ngFor="let reviewer of employee.reviewers"
+        >
+          {{ reviewer.name }}
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
   <div class="icons-container">
     <button mat-button (click)="openDialog('edit', employee)">
       <i class="material-icons edit"> edit </i>
     </button>
+    <button mat-button>
+      <i class="material-icons" (click)="openDialog('reviews', employee)">
+        assessment
+      </i>
+    </button>
+    <button mat-button>
+      <i class="material-icons" (click)="openDialog('reviewer', employee)">
+        group_add
+      </i>
+    </button>
     <button mat-button (click)="deleteEmployee(employee._id)">
-      <i class="material-icons delete"> delete_forever </i>
+      <i class="material-icons delete"> delete </i>
     </button>
   </div>
 </mat-card>

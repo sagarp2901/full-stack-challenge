@@ -1,6 +1,10 @@
-<h2>{{ titles[data.mode] }}</h2>
+<h2>{{ data.employee.name }}</h2>
+<h3>{{ titles[data.mode] }}</h3>
 
-<mat-form-field class="example-full-width" *ngIf="data.mode !== 'reviewer'">
+<mat-form-field
+  class="example-full-width"
+  *ngIf="data.mode == 'add' || data.mode == 'edit'"
+>
   <input #name matInput placeholder="Name" [(ngModel)]="employeeName" />
 </mat-form-field>
 <mat-list role="list" *ngIf="data.mode == 'reviewer'">
@@ -13,6 +17,17 @@
     ></mat-list-item
   >
 </mat-list>
+<mat-form-field *ngIf="data.mode === 'reviews'">
+  <input matInput placeholder="Add a review" [(ngModel)]="currentReview.text" />
+</mat-form-field>
+<button
+  mat-button
+  color="primary"
+  (click)="saveReview()"
+  *ngIf="data.mode === 'reviews'"
+>
+  Add Review
+</button>
 <!--
   <mat-form-field class="example-full-width">
     <input #name matInput placeholder="Rating" [(ngModel)]="rating" />

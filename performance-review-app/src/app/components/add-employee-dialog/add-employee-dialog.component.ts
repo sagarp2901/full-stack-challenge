@@ -24,20 +24,26 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
   rating;
   reviews;
   reviewers;
+  currentReview = { text: "", isEdit: false };
   updateAdminView = new EventEmitter();
   titles = {
     edit: "Edit Employee",
     add: "Add an Employee",
-    reviewer: "Select Reviewers"
+    reviewer: "Select Reviewers",
+    reviews: "Add Reviews"
   };
 
   ngOnInit() {
     if (this.data.mode == "edit") this.setUpdateData();
     if (this.data.mode == "reviewer") this.setReviewers();
+    if (this.data.mode == "reviews") this.setReviewers();
   }
 
   setUpdateData() {
     this.employeeName = this.data.employee.name;
+  }
+
+  setReviews() {
     this.reviews = this.data.employee.reviews;
   }
 
@@ -103,6 +109,16 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
 
     this.adminService.updateEmployee(this.data.employee).subscribe(data => {
       console.log("reviewers Updated successfully");
+    });
+    this.dialogRef.close();
+  }
+
+  saveReview() {
+    if (!(this.currentReview && this.currentReview.text)) return;
+    this.data.employee.reviews.push(this.currentReview);
+    this.currentReview = { text: "", isEdit: false };
+    this.adminService.updateEmployee(this.data.employee).subscribe(data => {
+      console.log("Review saved successfully");
     });
     this.dialogRef.close();
   }

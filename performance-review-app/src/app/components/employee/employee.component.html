@@ -1,5 +1,10 @@
-<mat-card>
+<mat-card [style.background-color]="renderColor()">
   <h3>{{ employee.name }}</h3>
+  <img
+    mat-card-image
+    src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+    alt="Photo of a Shiba Inu"
+  />
   <mat-accordion>
     <mat-expansion-panel>
       <mat-expansion-panel-header>

@@ -9,7 +9,8 @@
   </mat-toolbar>
   <div class="employees-container">
     <app-employee
-      *ngFor="let employee of employees"
+      *ngFor="let employee of employees; let i = index"
+      [colorIndex]="i"
       [employee]="employee"
       [employees]="employees"
       (employeeUpdated)="getUpdatedEmployees($event)"

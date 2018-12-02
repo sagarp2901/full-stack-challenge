@@ -1,6 +1,5 @@
-<p>employee-profile works!</p>
-<div *ngIf="profile">{{ profile.name }}</div>
-You can write reviews for your following peers:
+<h2 *ngIf="profile">Welcome {{ profile.name }}!</h2>
+<p>Your peers require your feedback..</p>
 <ul>
   <li *ngFor="let employee of employees">{{ employee }}</li>
 </ul>

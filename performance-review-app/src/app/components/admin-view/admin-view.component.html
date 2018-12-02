@@ -12,49 +12,68 @@
           </mat-panel-description>
         -->
       </mat-expansion-panel-header>
-      <div class="reviews-header">
-        <h3>Reviews:</h3>
-        <div class="icons-container">
-          <button mat-button (click)="openEditDialog(employee)">
-            <i class="material-icons edit"> edit </i>
-          </button>
-          <button mat-button (click)="deleteEmployee(employee._id)">
-            <i class="material-icons delete"> delete_forever </i>
+      <div class="panel-container">
+        <div class="reviews-container">
+          <h3>Reviews:</h3>
+          <ul>
+            <li *ngFor="let review of employee.reviews">
+              <span *ngIf="!review.isEdit">{{ review.text }}</span>
+              <mat-form-field *ngIf="review.isEdit">
+                <input matInput [(ngModel)]="review.text" />
+              </mat-form-field>
+              <i
+                *ngIf="!review.isEdit"
+                class="material-icons edit"
+                (click)="toggleReviewEdit(review)"
+              >
+                edit
+              </i>
+              <!--
+                <i
+                  *ngIf="!review.isEdit"
+                  class="material-icons delete"
+                  (click)="deleteReview(review, employee)"
+                >
+                  close
+                </i>
+              -->
+              <i
+                *ngIf="review.isEdit"
+                (click)="updateReview(review, employee)"
+                class="material-icons check"
+              >
+                check
+              </i>
+            </li>
+          </ul>
+        </div>
+        <div class="reviewers-container">
+          <h3>Assigned Reviewers:</h3>
+          <ul>
+            <li *ngFor="let reviewer of employee.reviewers">
+              {{ reviewer.name }}
+            </li>
+          </ul>
+          <button
+            class="add-employee-btn"
+            mat-raised-button
+            color="primary"
+            (click)="openDialog('reviewer', employee)"
+          >
+            Assign Reviewer
           </button>
         </div>
+        <div class="action-btn-container">
+          <div class="icons-container">
+            <button mat-button (click)="openDialog('edit', employee)">
+              <i class="material-icons edit"> edit </i>
+            </button>
+            <button mat-button (click)="deleteEmployee(employee._id)">
+              <i class="material-icons delete"> delete_forever </i>
+            </button>
+          </div>
+        </div>
       </div>
-
-      <ul>
-        <li *ngFor="let review of employee.reviews">
-          <span *ngIf="!review.isEdit">{{ review.text }}</span>
-          <mat-form-field *ngIf="review.isEdit">
-            <input matInput [(ngModel)]="review.text" />
-          </mat-form-field>
-          <i
-            *ngIf="!review.isEdit"
-            class="material-icons edit"
-            (click)="toggleReviewEdit(review)"
-          >
-            edit
-          </i>
-          <!--
-            <i
-              *ngIf="!review.isEdit"
-              class="material-icons delete"
-              (click)="deleteReview(review, employee)"
-            >
-              close
-            </i>
-          -->
-          <i
-            *ngIf="review.isEdit"
-            (click)="updateReview(review, employee)"
-            class="material-icons check"
-          >
-            check
-          </i>
-        </li>
-      </ul>
       <mat-form-field>
         <input
           matInput
@@ -65,14 +84,6 @@
       <button mat-button (click)="saveReview(employee)">
         <i class="material-icons check"> check </i>
       </button>
-      <button
-        class="add-employee-btn"
-        mat-raised-button
-        color="primary"
-        (click)="openAddDialog()"
-      >
-        Assign Reviewer
-      </button>
     </mat-expansion-panel>
   </mat-accordion>
 
@@ -80,7 +91,7 @@
     class="add-employee-btn"
     mat-raised-button
     color="primary"
-    (click)="openAddDialog()"
+    (click)="openDialog('add')"
   >
     Add New Employee
   </button>

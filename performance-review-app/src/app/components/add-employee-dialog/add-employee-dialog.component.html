@@ -1,8 +1,18 @@
-<h2>{{ data.mode == "add" ? "Add" : "Edit" }} an Employee</h2>
+<h2>{{ titles[data.mode] }}</h2>
 
-<mat-form-field class="example-full-width">
+<mat-form-field class="example-full-width" *ngIf="data.mode !== 'reviewer'">
   <input #name matInput placeholder="Name" [(ngModel)]="employeeName" />
 </mat-form-field>
+<mat-list role="list" *ngIf="data.mode == 'reviewer'">
+  <mat-list-item role="listitem" *ngFor="let reviewer of reviewers"
+    ><mat-checkbox
+      [value]="reviewer.name"
+      (change)="selectReviewer(reviewer)"
+      [checked]="reviewer.selected"
+      >{{ reviewer.name }}</mat-checkbox
+    ></mat-list-item
+  >
+</mat-list>
 <!--
   <mat-form-field class="example-full-width">
     <input #name matInput placeholder="Rating" [(ngModel)]="rating" />
@@ -17,4 +27,11 @@
   (click)="updateEmployee()"
 >
   Update Employee
+</button>
+<button
+  *ngIf="data.mode == 'reviewer'"
+  mat-raised-button
+  (click)="assignReviewers()"
+>
+  Add Reviewers
 </button>

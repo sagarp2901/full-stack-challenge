@@ -23,15 +23,40 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
   employeeName;
   rating;
   reviews;
+  reviewers;
   updateAdminView = new EventEmitter();
+  titles = {
+    edit: "Edit Employee",
+    add: "Add an Employee",
+    reviewer: "Select Reviewers"
+  };
+
   ngOnInit() {
     if (this.data.mode == "edit") this.setUpdateData();
+    if (this.data.mode == "reviewer") this.setReviewers();
   }
 
   setUpdateData() {
     this.employeeName = this.data.employee.name;
-    // this.rating = this.data.employee.rating;
     this.reviews = this.data.employee.reviews;
+  }
+
+  setReviewers() {
+    this.reviewers = [];
+    // Get all the employee names except the one thats being assigned reviewers to avoid writing self reviews
+    this.data.employees.forEach(emp => {
+      if (emp.name !== this.data.employee.name)
+        this.reviewers.push({ name: emp.name, selected: false });
+    });
+
+    // Update checkboxes for already assigned reviewers for this current employee in view
+    this.data.employee.reviewers.forEach(rev => {
+      this.reviewers.forEach(reviewer => {
+        if (rev.name == reviewer.name) {
+          reviewer.selected = true;
+        }
+      });
+    });
   }
 
   updateName(value) {
@@ -62,6 +87,22 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
     this.adminService.updateEmployee(updatedEmployee).subscribe(data => {
       console.log("Updated successfully");
       this.updateAdminView.emit();
+    });
+    this.dialogRef.close();
+  }
+
+  selectReviewer(reviewer) {
+    console.log(event);
+    reviewer.selected = !reviewer.selected;
+  }
+
+  assignReviewers() {
+    this.data.employee.reviewers = this.reviewers.filter(rev => {
+      return rev.selected;
+    });
+
+    this.adminService.updateEmployee(this.data.employee).subscribe(data => {
+      console.log("reviewers Updated successfully");
     });
     this.dialogRef.close();
   }

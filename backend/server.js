@@ -52,6 +52,7 @@ router.route("/employees/update/:id").post((req, res) => {
       employee.name = req.body.name;
       employee.rating = req.body.rating;
       employee.reviews = req.body.reviews;
+      employee.reviewers = req.body.reviewers;
 
       employee
         .save()

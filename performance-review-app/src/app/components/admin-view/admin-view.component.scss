@@ -3,6 +3,11 @@
     margin-bottom: 20px;
     width: 80%;
 
+    .panel-container {
+      display: flex;
+      justify-content: space-between;
+    }
+
     i {
       cursor: pointer;
     }
@@ -17,12 +22,6 @@
 
     .edit {
       color: #1e90ff;
-    }
-
-    .reviews-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
     }
 
     span {

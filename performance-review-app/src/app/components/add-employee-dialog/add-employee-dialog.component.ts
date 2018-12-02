@@ -72,7 +72,7 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
     };
     this.adminService.addEmployee(newEmployee).subscribe(data => {
       console.log("Added successfully");
-      this.updateAdminView.emit();
+      this.updateAdminView.emit(data);
     });
     this.dialogRef.close();
   }
@@ -86,7 +86,7 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
     };
     this.adminService.updateEmployee(updatedEmployee).subscribe(data => {
       console.log("Updated successfully");
-      this.updateAdminView.emit();
+      this.updateAdminView.emit(data);
     });
     this.dialogRef.close();
   }

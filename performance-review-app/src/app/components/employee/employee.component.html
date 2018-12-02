@@ -1,0 +1,11 @@
+<mat-card>
+  <h4>{{ employee.name }}</h4>
+  <div class="icons-container">
+    <button mat-button (click)="openDialog('edit', employee)">
+      <i class="material-icons edit"> edit </i>
+    </button>
+    <button mat-button (click)="deleteEmployee(employee._id)">
+      <i class="material-icons delete"> delete_forever </i>
+    </button>
+  </div>
+</mat-card>

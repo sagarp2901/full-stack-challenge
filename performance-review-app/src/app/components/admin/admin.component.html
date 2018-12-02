@@ -1,0 +1,18 @@
+<div class="admin-container">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Performance Review</span> <span class="example-spacer"></span>
+      <button mat-raised-button (click)="openDialog('add')">
+        Add Employee
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="employees-container">
+    <div *ngFor="let employee of employees">
+      <app-employee
+        [employee]="employee"
+        (employeeDeleted)="getUpdatedEmployees($event)"
+      ></app-employee>
+    </div>
+  </div>
+</div>

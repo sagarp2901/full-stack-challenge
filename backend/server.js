@@ -38,7 +38,14 @@ router.route("/employees/add").post((req, res) => {
   employee
     .save()
     .then(employee => {
-      res.status(200).json({ employee: "Added successfully" });
+      return Employee.find((err, employees) => {
+        if (err) console.log(err);
+        else {
+          res
+            .status(200)
+            .json({ message: "New Employee Added Successfully", employees });
+        }
+      });
     })
     .catch(err => {
       res.status(400).send("Falied to create new record");
@@ -57,7 +64,14 @@ router.route("/employees/update/:id").post((req, res) => {
       employee
         .save()
         .then(employee => {
-          res.json("Update Complete");
+          return Employee.find((err, employees) => {
+            if (err) console.log(err);
+            else {
+              res
+                .status(200)
+                .json({ message: "Employee Updated Successfully", employees });
+            }
+          });
         })
         .catch(err => {
           res.status(400).send("Update failed");
@@ -66,10 +80,24 @@ router.route("/employees/update/:id").post((req, res) => {
   });
 });
 
-router.route("/employees/delete/:id").get((req, res) => {
+/* router.route("/employees/delete/:id").get((req, res) => {
   Employee.findByIdAndRemove({ _id: req.params.id }, (err, employee) => {
     if (err) res.json(err);
     else res.json("Removed successfully");
+  });
+}); */
+router.route("/employees/delete/:id").get((req, res) => {
+  Employee.findByIdAndRemove({ _id: req.params.id }, (err, employee) => {
+    if (err) res.json(err);
+    else
+      return Employee.find((err, employees) => {
+        if (err) console.log(err);
+        else {
+          res
+            .status(200)
+            .json({ message: "Employee Deleted Successfully", employees });
+        }
+      });
   });
 });
 

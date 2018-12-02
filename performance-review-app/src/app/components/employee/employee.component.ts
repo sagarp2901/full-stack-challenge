@@ -20,6 +20,13 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit() {}
 
+  updateReview(review, employee) {
+    review.isEdit = false;
+    this.adminService.updateEmployee(employee).subscribe(data => {
+      console.log("Review saved successfully");
+    });
+  }
+
   deleteEmployee(employeeId) {
     this.adminService.deleteEmployee(employeeId).subscribe((data: any) => {
       console.log("Deleted successfully");
@@ -30,7 +37,8 @@ export class EmployeeComponent implements OnInit {
   openDialog(mode, employee): void {
     const dialogRef = this.dialog.open(AddEmployeeDialogComponent, {
       data: { mode, employee, employees: this.employees },
-      width: "250px"
+      width: "350px",
+      maxHeight: "400px"
     });
 
     dialogRef.componentInstance.updateAdminView.subscribe(data => {

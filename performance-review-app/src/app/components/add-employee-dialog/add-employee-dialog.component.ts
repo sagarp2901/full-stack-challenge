@@ -88,7 +88,8 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
       _id: this.data.employee._id,
       name: this.employeeName,
       rating: this.rating,
-      reviews: []
+      reviews: this.data.employee.reviews,
+      reviewers: this.data.employee.reviewers
     };
     this.adminService.updateEmployee(updatedEmployee).subscribe(data => {
       console.log("Updated successfully");

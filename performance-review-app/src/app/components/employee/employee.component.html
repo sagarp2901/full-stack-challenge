@@ -7,7 +7,24 @@
       </mat-expansion-panel-header>
       <mat-list role="list">
         <mat-list-item role="listitem" *ngFor="let review of employee.reviews">
-          {{ review.text }}
+          <span *ngIf="!review.isEdit">{{ review.text }}</span>
+          <mat-form-field *ngIf="review.isEdit">
+            <input matInput [(ngModel)]="review.text" />
+          </mat-form-field>
+          <i
+            *ngIf="!review.isEdit"
+            class="material-icons edit"
+            (click)="review.isEdit = true"
+          >
+            edit
+          </i>
+          <i
+            *ngIf="review.isEdit"
+            (click)="updateReview(review, employee)"
+            class="material-icons check"
+          >
+            check
+          </i>
         </mat-list-item>
       </mat-list>
     </mat-expansion-panel>
@@ -32,7 +49,7 @@
     </button>
     <button mat-button>
       <i class="material-icons" (click)="openDialog('reviews', employee)">
-        assessment
+        playlist_add
       </i>
     </button>
     <button mat-button>

@@ -1,4 +1,5 @@
 mat-card {
+  max-height: 450px;
   padding: 10px;
   margin: 10px;
   border-radius: 15px;
@@ -7,6 +8,17 @@ mat-card {
   position: relative;
 }
 
+mat-list {
+  overflow: auto;
+  max-height: 180px;
+}
+
 .icons-container {
+  margin-top: 20px;
   display: flex;
+  justify-content: space-between;
+}
+
+i {
+  cursor: pointer;
 }

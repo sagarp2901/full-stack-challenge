@@ -53,9 +53,13 @@ export class AdminViewComponent implements OnInit {
       width: "250px"
     });
 
+    dialogRef.componentInstance.updateAdminView.subscribe(() => {
+      this.getEmployees();
+    });
+
     dialogRef.afterClosed().subscribe(result => {
       console.log("The dialog was closed");
-      this.getEmployees();
+      // this.getEmployees();
     });
   }
 
@@ -67,7 +71,7 @@ export class AdminViewComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log("The dialog was closed");
-      this.getEmployees();
+      // this.getEmployees();
     });
   }
 

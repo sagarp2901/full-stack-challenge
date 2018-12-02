@@ -3,7 +3,9 @@
   <mat-accordion>
     <mat-expansion-panel *ngFor="let employee of employees">
       <mat-expansion-panel-header>
-        <mat-panel-title> {{ employee.name }} </mat-panel-title>
+        <mat-panel-title>
+          <h4>{{ employee.name }}</h4>
+        </mat-panel-title>
         <!--
           <mat-panel-description
             >Rating: {{ employee.rating }}
@@ -35,13 +37,15 @@
           >
             edit
           </i>
-          <i
-            *ngIf="!review.isEdit"
-            class="material-icons delete"
-            (click)="deleteReview(review, employee)"
-          >
-            close
-          </i>
+          <!--
+            <i
+              *ngIf="!review.isEdit"
+              class="material-icons delete"
+              (click)="deleteReview(review, employee)"
+            >
+              close
+            </i>
+          -->
           <i
             *ngIf="review.isEdit"
             (click)="updateReview(review, employee)"
@@ -60,6 +64,14 @@
       </mat-form-field>
       <button mat-button (click)="saveReview(employee)">
         <i class="material-icons check"> check </i>
+      </button>
+      <button
+        class="add-employee-btn"
+        mat-raised-button
+        color="primary"
+        (click)="openAddDialog()"
+      >
+        Assign Reviewer
       </button>
     </mat-expansion-panel>
   </mat-accordion>

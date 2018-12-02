@@ -3,9 +3,11 @@
 <mat-form-field class="example-full-width">
   <input #name matInput placeholder="Name" [(ngModel)]="employeeName" />
 </mat-form-field>
-<mat-form-field class="example-full-width">
-  <input #name matInput placeholder="Rating" [(ngModel)]="rating" />
-</mat-form-field>
+<!--
+  <mat-form-field class="example-full-width">
+    <input #name matInput placeholder="Rating" [(ngModel)]="rating" />
+  </mat-form-field>
+-->
 <button *ngIf="data.mode == 'add'" mat-raised-button (click)="addEmployee()">
   Create Employee
 </button>

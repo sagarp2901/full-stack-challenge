@@ -10,6 +10,7 @@ import { AdminService } from "../../services/admin.service";
 export class EmployeeProfileComponent implements OnInit {
   id: string;
   profile: any;
+  employees = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -21,6 +22,16 @@ export class EmployeeProfileComponent implements OnInit {
       this.id = params["id"];
       this.adminService.getEmployeeById(this.id).subscribe(data => {
         this.profile = data;
+      });
+    });
+
+    this.adminService.getEmployees().subscribe((data: []) => {
+      data.forEach((emp: any) => {
+        emp.reviewers.forEach(reviewer => {
+          if (reviewer.name == this.profile.name) {
+            this.employees.push(emp.name);
+          }
+        });
       });
     });
   }

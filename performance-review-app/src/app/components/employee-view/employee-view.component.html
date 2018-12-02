@@ -1,3 +1,10 @@
-<p>
-  employee-view works!
-</p>
+<h2>Login as:</h2>
+<div class="employees-login-container">
+  <button
+    mat-button
+    [routerLink]="['/employee-profile', employee._id]"
+    *ngFor="let employee of employees"
+  >
+    {{ employee.name }}
+  </button>
+</div>

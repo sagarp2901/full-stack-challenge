@@ -57,6 +57,7 @@ router.route("/employees/update/:id").post((req, res) => {
     if (!employee) return next(new Error("Could not load document"));
     else {
       employee.name = req.body.name;
+      employee.feedback = req.body.feedback;
       employee.rating = req.body.rating;
       employee.reviews = req.body.reviews;
       employee.reviewers = req.body.reviewers;

@@ -14,6 +14,9 @@ let Employee = new Schema({
   },
   reviewers: {
     type: Array
+  },
+  feedback: {
+    type: Object
   }
 });
 

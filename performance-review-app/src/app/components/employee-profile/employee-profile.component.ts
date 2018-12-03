@@ -9,7 +9,7 @@ import { AdminService } from "../../services/admin.service";
 })
 export class EmployeeProfileComponent implements OnInit {
   id: string;
-  profile: any;
+  currentProfile: any;
   employees = [];
 
   constructor(
@@ -21,17 +21,31 @@ export class EmployeeProfileComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params["id"];
       this.adminService.getEmployeeById(this.id).subscribe(data => {
-        this.profile = data;
+        this.currentProfile = data;
       });
     });
 
     this.adminService.getEmployees().subscribe((data: []) => {
       data.forEach((emp: any) => {
         emp.reviewers.forEach(reviewer => {
-          if (reviewer.name == this.profile.name) {
-            this.employees.push(emp.name);
+          if (
+            reviewer.name == this.currentProfile.name &&
+            // Filtering out employees who's feedback is complete already.
+            !emp.feedback.isComplete
+          ) {
+            this.employees.push(emp);
           }
         });
+      });
+    });
+  }
+
+  submitFeedback(employee, isComplete) {
+    employee.feedback.isComplete = isComplete;
+    this.adminService.updateEmployee(employee).subscribe(data => {
+      console.log("Feedback Saved successfully");
+      this.employees = this.employees.filter(emp => {
+        return !emp.feedback.isComplete;
       });
     });
   }

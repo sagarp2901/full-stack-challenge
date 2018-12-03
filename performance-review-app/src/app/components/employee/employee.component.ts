@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { Employee } from "src/app/models/employee";
+import { Employee } from "src/app/interfaces/employee";
 import { AdminService } from "src/app/services/admin.service";
 import { MatDialog } from "@angular/material";
 import { AddEmployeeDialogComponent } from "src/app/components/add-employee-dialog/add-employee-dialog.component";

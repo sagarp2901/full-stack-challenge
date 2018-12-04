@@ -9,8 +9,10 @@ import { AdminService } from "../../services/admin.service";
 })
 export class EmployeeProfileComponent implements OnInit {
   id: string;
-  currentProfile: any;
+  currentEmployee: any;
   employees = [];
+  writeReviewFor = [];
+  employeeFeedback = "";
 
   constructor(
     private route: ActivatedRoute,
@@ -21,32 +23,43 @@ export class EmployeeProfileComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params["id"];
       this.adminService.getEmployeeById(this.id).subscribe(data => {
-        this.currentProfile = data;
-      });
-    });
+        this.currentEmployee = data;
+        this.adminService.getEmployees().subscribe((data: []) => {
+          this.employees = data;
 
-    this.adminService.getEmployees().subscribe((data: []) => {
-      data.forEach((emp: any) => {
-        emp.reviewers.forEach(reviewer => {
-          if (
-            reviewer.name == this.currentProfile.name &&
-            // Filtering out employees who's feedback is complete already.
-            !emp.feedback.isComplete
-          ) {
-            this.employees.push(emp);
-          }
+          this.employees.forEach((emp: any) => {
+            emp.reviewers.forEach((rev: any) => {
+              if (rev.name == this.currentEmployee.name) {
+                this.writeReviewFor.push(emp);
+              }
+            });
+          });
         });
       });
     });
   }
 
   submitFeedback(employee, isComplete) {
-    employee.feedback.isComplete = isComplete;
+    employee.feedbacks.push({
+      text: this.employeeFeedback,
+      isComplete,
+      feedbackId: this.currentEmployee._id,
+      feedBackBy: this.currentEmployee.name
+    });
+    this.employeeFeedback = "";
+
+    // Remove the completed employee from the view
+    this.writeReviewFor = this.writeReviewFor.filter(emp => {
+      return emp._id !== employee._id;
+    });
+
+    // Remove the reviewer from this person's database entry
+    employee.reviewers = employee.reviewers.filter(rev => {
+      return rev._id !== this.currentEmployee._id;
+    });
+
     this.adminService.updateEmployee(employee).subscribe(data => {
       console.log("Feedback Saved successfully");
-      this.employees = this.employees.filter(emp => {
-        return !emp.feedback.isComplete;
-      });
     });
   }
 }

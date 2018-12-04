@@ -63,7 +63,7 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
     // Get all the employee names except the one thats being assigned reviewers to avoid writing self reviews
     this.data.employees.forEach(emp => {
       if (emp.name !== this.data.employee.name)
-        this.reviewers.push({ name: emp.name, selected: false });
+        this.reviewers.push({ _id: emp._id, name: emp.name, selected: false });
     });
 
     // Update checkboxes for already assigned reviewers for this current employee in view

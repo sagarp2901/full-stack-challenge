@@ -1,24 +1,22 @@
 <div class="employee-profile-container">
-  <h2 *ngIf="currentProfile">Welcome {{ currentProfile.name }}!</h2>
+  <h2 *ngIf="currentEmployee">Welcome {{ currentEmployee.name }}!</h2>
   <p>Your peers require your feedback..</p>
-  <p *ngIf="!employees.length">
+  <p *ngIf="!writeReviewFor.length">
     Hurrayy!! You do not have any more peers to provide feedback.
   </p>
-  <mat-accordion *ngIf="employees.length">
-    <mat-expansion-panel *ngFor="let employee of employees">
+
+  <mat-accordion *ngIf="writeReviewFor.length">
+    <mat-expansion-panel *ngFor="let employee of writeReviewFor">
       <mat-expansion-panel-header>
         <mat-panel-title>
           <h4>{{ employee.name }}</h4>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <mat-form-field
-        class="example-full-width"
-        *ngIf="!employee.feedback.isComplete"
-      >
+      <mat-form-field class="example-full-width">
         <textarea
           matInput
           placeholder="Provide your feedback"
-          [(ngModel)]="employee.feedback.text"
+          [(ngModel)]="employeeFeedback"
         ></textarea>
       </mat-form-field>
       <div class="btn-container">

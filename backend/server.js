@@ -48,7 +48,7 @@ router.route("/employees/add").post((req, res) => {
       });
     })
     .catch(err => {
-      res.status(400).send("Falied to create new record");
+      res.status(400).send(err);
     });
 });
 
@@ -58,9 +58,11 @@ router.route("/employees/update/:id").post((req, res) => {
     else {
       employee.name = req.body.name;
       employee.feedback = req.body.feedback;
+      employee.adminReview = req.body.adminReview;
       employee.rating = req.body.rating;
       employee.reviews = req.body.reviews;
       employee.reviewers = req.body.reviewers;
+      employee.title = req.body.title;
 
       employee
         .save()

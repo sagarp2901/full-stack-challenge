@@ -11,11 +11,7 @@
 }
 
 .employees-container {
-  display: flex;
-  flex-wrap: wrap;
-
   app-employee {
-    width: 390px;
   }
 }
 

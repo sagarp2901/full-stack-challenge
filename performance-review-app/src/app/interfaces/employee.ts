@@ -1,7 +1,11 @@
 export interface Employee {
   _id: string;
   name: string;
-  reviews: Array<any>;
-  reviewers: Array<any>;
-  feedback: any;
+  title: string;
+  adminReview: any;
+  reviewers: any[];
+  feedbacks: any[];
+  ratings: number[];
+  image: string;
+  avgRating: number;
 }

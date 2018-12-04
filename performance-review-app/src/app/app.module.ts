@@ -17,7 +17,8 @@ import {
   MatExpansionModule,
   MatListModule,
   MatToolbarModule,
-  MatIconModule
+  MatIconModule,
+  MatSelectModule
 } from "@angular/material";
 import { HomeComponent } from "./components/home/home.component";
 import { EmployeeViewComponent } from "./components/employee-view/employee-view.component";
@@ -52,6 +53,7 @@ import { EmployeeComponent } from "./components/employee/employee.component";
     MatFormFieldModule,
     MatExpansionModule,
     MatListModule,
+    MatSelectModule,
     MatToolbarModule
   ],
   entryComponents: [AddEmployeeDialogComponent],

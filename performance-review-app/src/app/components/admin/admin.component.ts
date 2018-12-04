@@ -24,6 +24,13 @@ export class AdminComponent implements OnInit {
   }
 
   openDialog(mode, employee?): void {
+    if (mode == "add") {
+      employee = {
+        name: "",
+        title: "",
+        adminReview: { text: "", isEdit: true }
+      };
+    }
     const dialogRef = this.dialog.open(AddEmployeeDialogComponent, {
       data: { mode, employee, employees: this.employees },
       width: "250px"

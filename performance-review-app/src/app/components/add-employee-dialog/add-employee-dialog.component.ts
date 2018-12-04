@@ -7,6 +7,7 @@ import {
 } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { AdminService } from "../../services/admin.service";
+import * as toonAvatar from "cartoon-avatar";
 
 @Component({
   selector: "app-add-employee-dialog",
@@ -20,31 +21,41 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef<AddEmployeeDialogComponent>
   ) {}
 
-  employeeName;
-  rating;
   reviews;
   reviewers;
-  currentReview = { text: "", isEdit: false };
   updateAdminView = new EventEmitter();
-  titles = {
+  pageTitles = {
     edit: "Edit Employee",
     add: "Add an Employee",
     reviewer: "Select Reviewers",
     reviews: "Add Reviews"
   };
 
+  employee = {
+    name: "",
+    title: "",
+    adminReview: { text: "", isEdit: true }
+  };
+
   ngOnInit() {
-    if (this.data.mode == "edit") this.setUpdateData();
+    if (this.data.mode == "edit") this.setEditData();
     if (this.data.mode == "reviewer") this.setReviewers();
     if (this.data.mode == "reviews") this.setReviewers();
   }
 
-  setUpdateData() {
-    this.employeeName = this.data.employee.name;
+  // Set data during edit mode
+  setEditData() {
+    this.employee.name = this.data.employee.name;
+    this.employee.title = this.data.employee.title;
+    this.employee.adminReview = this.data.adminReview;
   }
 
   setReviews() {
     this.reviews = this.data.employee.reviews;
+  }
+
+  setField(field, value) {
+    this.employee[field] = value;
   }
 
   setReviewers() {
@@ -65,18 +76,14 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
     });
   }
 
-  updateName(value) {
-    this.employeeName = value;
-  }
-
-  addEmployee() {
+  createEmployee() {
     // Create a new employee with new name and add it to the list.
-    let newEmployee = {
-      name: this.employeeName,
-      // rating: this.rating,
-      reviews: []
-    };
-    this.adminService.addEmployee(newEmployee).subscribe(data => {
+    this.data.employee.name = this.employee.name;
+    this.data.employee.title = this.employee.title;
+    this.data.employee.adminReview = this.employee.adminReview;
+    // Generate a random image avatar
+    this.data.employee.image = toonAvatar.generate_avatar();
+    this.adminService.addEmployee(this.data.employee).subscribe(data => {
       console.log("Added successfully");
       this.updateAdminView.emit(data);
     });
@@ -84,14 +91,9 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
   }
 
   updateEmployee() {
-    let updatedEmployee = {
-      _id: this.data.employee._id,
-      name: this.employeeName,
-      rating: this.rating,
-      reviews: this.data.employee.reviews,
-      reviewers: this.data.employee.reviewers
-    };
-    this.adminService.updateEmployee(updatedEmployee).subscribe(data => {
+    this.data.employee.name = this.employee.name;
+    this.data.employee.title = this.employee.title;
+    this.adminService.updateEmployee(this.data.employee).subscribe(data => {
       console.log("Updated successfully");
       this.updateAdminView.emit(data);
     });
@@ -115,16 +117,13 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
   }
 
   saveReview() {
-    if (!(this.currentReview && this.currentReview.text)) return;
-    this.data.employee.reviews.push(this.currentReview);
-    this.currentReview = { text: "", isEdit: false };
+    if (!(this.employee.adminReview && this.employee.adminReview.text)) return;
+    this.data.employee.adminReview = this.employee.adminReview;
     this.adminService.updateEmployee(this.data.employee).subscribe(data => {
       console.log("Review saved successfully");
     });
     this.dialogRef.close();
   }
 
-  ngOnDestroy() {
-    this.employeeName = "";
-  }
+  ngOnDestroy() {}
 }

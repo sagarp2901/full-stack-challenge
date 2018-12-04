@@ -1,23 +1,60 @@
 mat-card {
-  padding: 10px;
+  padding: 10px 20px 10px 20px;
   margin: 10px;
   border-radius: 15px;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.26);
   overflow: hidden;
   position: relative;
-}
 
-mat-list {
-  overflow: auto;
-  max-height: 180px;
-}
+  .header {
+    display: flex;
+    justify-content: space-between;
+  }
 
-.icons-container {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-}
+  .icons-container {
+    display: flex;
+    justify-content: space-between;
 
-i {
-  cursor: pointer;
+    i {
+      cursor: pointer;
+    }
+  }
+
+  .employee-container {
+    display: flex;
+    justify-content: space-between;
+
+    .image-avatar {
+      width: 15%;
+      padding-left: 16px;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .employee-details {
+      width: 85%;
+
+      .example-full-width {
+        width: 100%;
+      }
+    }
+  }
+
+  .reviewers-container {
+    display: flex;
+
+    .reviewer-card {
+      background-color: rgb(252, 71, 71);
+    }
+
+    button {
+      margin-right: 10px;
+    }
+  }
+
+  .assign-btn {
+    margin-top: 20px;
+  }
 }

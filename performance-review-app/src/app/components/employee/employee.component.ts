@@ -46,8 +46,8 @@ export class EmployeeComponent implements OnInit {
       : this.colors[this.colorIndex % 2];
   }
 
-  updateReview(review, employee) {
-    review.isEdit = false;
+  updateReview(employee) {
+    employee.adminReview.isEdit = false;
     this.adminService.updateEmployee(employee).subscribe(data => {
       console.log("Review saved successfully");
     });

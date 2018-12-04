@@ -1,11 +1,17 @@
 <h2>{{ data.employee.name }}</h2>
-<h3>{{ titles[data.mode] }}</h3>
+<h3>{{ pageTitles[data.mode] }}</h3>
 
 <mat-form-field
   class="example-full-width"
   *ngIf="data.mode == 'add' || data.mode == 'edit'"
 >
-  <input #name matInput placeholder="Name" [(ngModel)]="employeeName" />
+  <input matInput placeholder="Name" [(ngModel)]="employee.name" />
+</mat-form-field>
+<mat-form-field
+  class="example-full-width"
+  *ngIf="data.mode == 'add' || data.mode == 'edit'"
+>
+  <input matInput placeholder="Job Title" [(ngModel)]="employee.title" />
 </mat-form-field>
 <mat-list role="list" *ngIf="data.mode == 'reviewer'">
   <mat-list-item role="listitem" *ngFor="let reviewer of reviewers"
@@ -33,7 +39,7 @@
     <input #name matInput placeholder="Rating" [(ngModel)]="rating" />
   </mat-form-field>
 -->
-<button *ngIf="data.mode == 'add'" mat-raised-button (click)="addEmployee()">
+<button *ngIf="data.mode == 'add'" mat-raised-button (click)="createEmployee()">
   Create Employee
 </button>
 <button

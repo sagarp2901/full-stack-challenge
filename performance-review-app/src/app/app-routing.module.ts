@@ -6,7 +6,7 @@ import { EmployeeProfileComponent } from "src/app/components/employee-profile/em
 import { AdminComponent } from "./components/admin/admin.component";
 
 const routes: Routes = [
-  { path: "", redirectTo: "/home", pathMatch: "full" },
+  { path: "", redirectTo: "/admin", pathMatch: "full" },
   { path: "home", component: HomeComponent },
   { path: "admin", component: AdminComponent },
   { path: "employee", component: EmployeeViewComponent },

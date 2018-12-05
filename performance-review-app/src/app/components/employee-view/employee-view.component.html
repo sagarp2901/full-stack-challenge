@@ -5,7 +5,13 @@
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item routerLink="/admin">Admin</button>
-      <button mat-menu-item routerLink="/employee">Employee</button>
+      <button
+        mat-menu-item
+        [routerLink]="['/employee-profile', employee._id]"
+        *ngFor="let employee of employees"
+      >
+        {{ employee.name }}
+      </button>
     </mat-menu>
     <span>Performance Review: Employee</span>
     <span class="example-spacer"></span>

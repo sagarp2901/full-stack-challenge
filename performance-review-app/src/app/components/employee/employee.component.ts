@@ -17,7 +17,6 @@ export class EmployeeComponent implements OnInit {
     "#FFFF5D",
     "#69FFFF",
     "#FF69FF",
-    "#CDB075",
     "#FFAFAF",
     "#AFFFAF",
     "#AFAFFF",
@@ -25,7 +24,6 @@ export class EmployeeComponent implements OnInit {
     "#AFFFFF",
     "#FFAFFF",
     "#E4D5B5",
-    "#A4B086",
     "#819EC1"
   ];
 

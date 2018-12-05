@@ -1,6 +1,7 @@
 <mat-card [style.background-color]="renderColor()">
   <div class="header">
     <h3>{{ employee.name }}</h3>
+    <h4>Rating: {{ avgRating(employee.ratings) }}</h4>
     <div class="icons-container">
       <button mat-button (click)="openDialog('edit', employee)">
         <i class="material-icons edit"> edit </i>

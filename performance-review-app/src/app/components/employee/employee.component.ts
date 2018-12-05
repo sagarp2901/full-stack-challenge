@@ -73,4 +73,8 @@ export class EmployeeComponent implements OnInit {
       console.log("The dialog was closed");
     });
   }
+
+  avgRating(ratings: []) {
+    return ratings.reduce((a, b) => a + b, 0) / ratings.length;
+  }
 }

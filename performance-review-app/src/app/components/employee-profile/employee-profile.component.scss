@@ -1,5 +1,15 @@
 .employee-profile-container {
   padding: 30px;
+
+  .employee-panel-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .text-container {
+      width: 85%;
+    }
+  }
 }
 .example-full-width {
   width: 100%;
@@ -7,7 +17,6 @@
 
 .btn-container {
   display: flex;
-  justify-content: center;
 
   button {
     margin-right: 20px;

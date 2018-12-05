@@ -11,8 +11,9 @@
     <span class="example-spacer"></span>
   </mat-toolbar-row>
 </mat-toolbar>
-<div class="employee-profile-container">
-  <h2 *ngIf="currentEmployee">Welcome {{ currentEmployee.name }}!</h2>
+<div class="employee-profile-container" *ngIf="currentEmployee">
+  <h2>Welcome back {{ currentEmployee.name }}!</h2>
+  <img mat-card-image src="{{currentEmployee.image}}" />
   <p>Your peers require your feedback..</p>
   <p *ngIf="!writeReviewFor.length">
     Hurrayy!! You do not have any more peers to provide feedback.
@@ -25,28 +26,35 @@
           <h4>{{ employee.name }}</h4>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <mat-form-field class="example-full-width">
-        <textarea
-          matInput
-          placeholder="Provide your feedback"
-          [(ngModel)]="employeeFeedback"
-        ></textarea>
-      </mat-form-field>
-      <div class="btn-container">
-        <button
-          mat-raised-button
-          color="accent"
-          (click)="submitFeedback(employee, false)"
-        >
-          Save
-        </button>
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="submitFeedback(employee, true)"
-        >
-          Submit
-        </button>
+      <div class="employee-panel-container">
+        <img mat-card-image src="{{employee.image}}" />
+        <div class="text-container">
+          <mat-form-field class="example-full-width">
+            <textarea
+              matInput
+              placeholder="Provide your feedback"
+              [(ngModel)]="employee.feedback.text"
+            ></textarea>
+          </mat-form-field>
+          <div class="btn-container">
+            <!--
+              <button
+                mat-raised-button
+                color="accent"
+                (click)="submitFeedback(employee, false)"
+              >
+                Save
+              </button>
+            -->
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="submitFeedback(employee, true)"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
       </div>
     </mat-expansion-panel>
   </mat-accordion>

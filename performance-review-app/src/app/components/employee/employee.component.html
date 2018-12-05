@@ -27,7 +27,7 @@
       <mat-accordion>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
-            <mat-panel-title> Review </mat-panel-title>
+            <mat-panel-title> Admin's Review </mat-panel-title>
           </mat-expansion-panel-header>
           <p *ngIf="!employee.adminReview.isEdit">
             {{ employee.adminReview.text }}
@@ -59,9 +59,30 @@
         </mat-expansion-panel>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
-            <mat-panel-title> Assigned Reviewers </mat-panel-title>
+            <mat-panel-title>Colleague Reviews</mat-panel-title>
           </mat-expansion-panel-header>
-          <div class="reviewers-container">
+          <mat-list role="list">
+            <mat-list-item
+              role="listitem"
+              *ngFor="let feedback of employee.feedbacks"
+              >{{ feedback.text }}</mat-list-item
+            >
+          </mat-list>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Reviewers</mat-panel-title>
+            <mat-panel-description>
+              <div *ngIf="!employee.reviewers.length">
+                Assign reviewers for {{ employee.name }}
+              </div>
+              <div *ngIf="employee.reviewers.length">
+                {{ employee.name }} has
+                {{ employee.reviewers.length }} reviewer(s).
+              </div>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="reviewers-container" *ngIf="employee.reviewers.length">
             <mat-card
               class="reviewer-card"
               *ngFor="let reviewer of employee.reviewers"

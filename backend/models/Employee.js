@@ -12,8 +12,8 @@ let Employee = new Schema({
   title: {
     type: String
   },
-  ratings: {
-    type: Array
+  adminReview: {
+    type: Object
   },
   feedbacks: {
     type: Array
@@ -21,11 +21,8 @@ let Employee = new Schema({
   reviewers: {
     type: Array
   },
-  reviewings: {
+  ratings: {
     type: Array
-  },
-  adminReview: {
-    type: Object
   }
 });
 

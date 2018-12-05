@@ -11,7 +11,10 @@ const router = express.Router();
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect("mongodb://localhost:27017/employees");
+//Local
+// mongoose.connect("mongodb://localhost:27017/employees");
+// Mlabs instance
+mongoose.connect("mongodb://dev1:developer1@ds115283.mlab.com:15283/employees");
 
 const connection = mongoose.connection;
 
@@ -57,12 +60,12 @@ router.route("/employees/update/:id").post((req, res) => {
     if (!employee) return next(new Error("Could not load document"));
     else {
       employee.name = req.body.name;
-      employee.feedback = req.body.feedback;
-      employee.adminReview = req.body.adminReview;
-      employee.rating = req.body.rating;
-      employee.reviews = req.body.reviews;
-      employee.reviewers = req.body.reviewers;
+      employee.image = req.body.image;
       employee.title = req.body.title;
+      employee.adminReview = req.body.adminReview;
+      employee.feedbacks = req.body.feedbacks;
+      employee.reviewers = req.body.reviewers;
+      employee.rating = req.body.rating;
 
       employee
         .save()

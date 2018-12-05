@@ -1,6 +1,14 @@
 .employee-profile-container {
   padding: 30px;
 
+  .mat-card-image {
+    width: 185px;
+  }
+
+  .mat-card-image {
+    margin: 0;
+  }
+
   .employee-panel-container {
     display: flex;
     justify-content: space-between;

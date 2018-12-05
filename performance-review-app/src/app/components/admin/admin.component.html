@@ -1,7 +1,15 @@
 <div class="admin-container">
   <mat-toolbar color="primary">
     <mat-toolbar-row>
-      <span>Performance Review</span> <span class="example-spacer"></span>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <i class="material-icons"> menu </i>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/admin">Admin</button>
+        <button mat-menu-item routerLink="/employee">Employee</button>
+      </mat-menu>
+      <span>Performance Review: Admin</span>
+      <span class="example-spacer"></span>
       <button mat-raised-button (click)="openDialog('add')">
         Add Employee
       </button>

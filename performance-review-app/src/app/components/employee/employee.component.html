@@ -18,16 +18,24 @@
       </button>
     </div>
   </div>
-  <h4>{{ employee.title }}</h4>
   <div class="employee-container">
     <div class="image-avatar">
       <img mat-card-image src="{{employee.image}}" />
+      <h4>{{ employee.title }}</h4>
     </div>
     <div class="employee-details">
       <mat-accordion>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
-            <mat-panel-title> Admin's Review </mat-panel-title>
+            <mat-panel-title> Review </mat-panel-title>
+            <mat-panel-description>
+              <div *ngIf="employee.adminReview.text.length">
+                You can update {{ employee.name }}'s review anytime
+              </div>
+              <div *ngIf="!employee.adminReview.text.length">
+                Write a review for {{ employee.name }}
+              </div>
+            </mat-panel-description>
           </mat-expansion-panel-header>
           <p *ngIf="!employee.adminReview.isEdit">
             {{ employee.adminReview.text }}
@@ -59,7 +67,11 @@
         </mat-expansion-panel>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
-            <mat-panel-title>Colleague Reviews</mat-panel-title>
+            <mat-panel-title>Comments</mat-panel-title>
+            <mat-panel-description
+              >Reviews provided by {{ employee.name }}'s
+              colleagues</mat-panel-description
+            >
           </mat-expansion-panel-header>
           <mat-list role="list">
             <mat-list-item

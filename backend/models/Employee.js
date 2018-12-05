@@ -23,6 +23,9 @@ let Employee = new Schema({
   },
   ratings: {
     type: Array
+  },
+  adminRating: {
+    type: Number
   }
 });
 

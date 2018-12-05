@@ -14,6 +14,8 @@ export class EmployeeProfileComponent implements OnInit {
   writeReviewFor = [];
   employeeFeedback = "";
 
+  availableRatings = [1, 2, 3, 4, 5];
+
   constructor(
     private route: ActivatedRoute,
     private adminService: AdminService
@@ -43,6 +45,29 @@ export class EmployeeProfileComponent implements OnInit {
     });
   }
 
+  updateRatingByEmployee(event, employee) {
+    // Set an individual rating given by this employee
+    employee.employeeRating = event.value;
+
+    if (!employee.ratings.length)
+      employee.ratings.push({
+        rating: event.value,
+        ratingId: this.currentEmployee._id
+      });
+
+    employee.ratings.forEach(rating => {
+      // rating by this employee exists then update it or else create a new rating
+      if (rating.ratingId == employee._id) {
+        rating.rating = event.value;
+      } else {
+        employee.ratings.push({
+          rating: event.value,
+          ratingId: this.currentEmployee._id
+        });
+      }
+    });
+  }
+
   submitFeedback(employee, isComplete) {
     // Adding feedback for the employee that needs feedback from this current employee
     employee.feedbacks.push({
@@ -68,5 +93,13 @@ export class EmployeeProfileComponent implements OnInit {
     this.adminService.updateEmployee(employee).subscribe(data => {
       console.log("Feedback Saved successfully");
     });
+  }
+
+  avgRating(ratings: []) {
+    let sum = 0;
+    ratings.forEach((element: any) => {
+      sum = sum + element.rating;
+    });
+    return Math.floor(sum / ratings.length);
   }
 }

@@ -1,7 +1,7 @@
 <mat-card [style.background-color]="renderColor()">
   <div class="header">
     <h3>{{ employee.name }}</h3>
-    <h4>Rating: {{ avgRating(employee.ratings) }}</h4>
+    <h4>Rating: {{ avgRating(employee.ratings) || 0 }}</h4>
     <div class="icons-container">
       <button mat-button (click)="openDialog('edit', employee)">
         <i class="material-icons edit"> edit </i>
@@ -30,19 +30,36 @@
               </div>
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <p *ngIf="!employee.adminReview.isEdit">
-            {{ employee.adminReview.text }}
-          </p>
-          <mat-form-field
-            class="example-full-width"
-            *ngIf="employee.adminReview.isEdit"
-          >
-            <textarea
-              matInput
-              placeholder="Provide your review"
-              [(ngModel)]="employee.adminReview.text"
-            ></textarea>
-          </mat-form-field>
+          <div class="review-input-container">
+            <p *ngIf="!employee.adminReview.isEdit" class="input-text">
+              {{ employee.adminReview.text }}
+            </p>
+            <mat-form-field
+              class="input-text"
+              *ngIf="employee.adminReview.isEdit"
+            >
+              <textarea
+                matInput
+                placeholder="Provide your review"
+                [(ngModel)]="employee.adminReview.text"
+              ></textarea>
+            </mat-form-field>
+            <mat-form-field class="input-rating">
+              <mat-select
+                placeholder="Rating"
+                (selectionChange)="updateRatingByAdmin($event, employee)"
+                [(ngModel)]="employee.adminRating"
+              >
+                <mat-option
+                  *ngFor="let rating of availableRatings"
+                  [value]="rating"
+                >
+                  {{ rating }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
           <button
             *ngIf="employee.adminReview.isEdit"
             (click)="updateReview(employee)"

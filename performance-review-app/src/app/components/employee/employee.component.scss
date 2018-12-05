@@ -47,8 +47,17 @@ mat-card {
     .employee-details {
       width: 85%;
 
-      .example-full-width {
-        width: 100%;
+      .review-input-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        .input-text {
+          width: 75%;
+        }
+        .input-rating {
+          width: 20%;
+        }
       }
     }
   }

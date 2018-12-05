@@ -34,6 +34,11 @@ export class EmployeeComponent implements OnInit {
 
   @Input() employees: Employee[];
 
+  availableRatings = [1, 2, 3, 4, 5];
+
+  // Just creating a unique ID for this admin so that it can be used to identify admin rating
+  adminId = "fe7wr6y32898t2";
+
   constructor(private adminService: AdminService, public dialog: MatDialog) {}
 
   ngOnInit() {}
@@ -48,6 +53,29 @@ export class EmployeeComponent implements OnInit {
     employee.adminReview.isEdit = false;
     this.adminService.updateEmployee(employee).subscribe(data => {
       console.log("Review saved successfully");
+    });
+  }
+
+  updateRatingByAdmin(event, employee) {
+    // Set an individual rating given by the admin
+    employee.adminRating = event.value;
+
+    if (!employee.ratings.length)
+      employee.ratings.push({
+        rating: event.value,
+        ratingId: this.adminId
+      });
+
+    employee.ratings.forEach(rating => {
+      // IF rating by the admin exists then update it or else create a new rating
+      if (rating.ratingId == this.adminId) {
+        rating.rating = event.value;
+      } else {
+        employee.ratings.push({
+          rating: event.value,
+          ratingId: this.adminId
+        });
+      }
     });
   }
 
@@ -75,6 +103,10 @@ export class EmployeeComponent implements OnInit {
   }
 
   avgRating(ratings: []) {
-    return ratings.reduce((a, b) => a + b, 0) / ratings.length;
+    let sum = 0;
+    ratings.forEach((element: any) => {
+      sum = sum + element.rating;
+    });
+    return Math.floor(sum / ratings.length);
   }
 }

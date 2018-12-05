@@ -18,6 +18,13 @@
 
     .text-container {
       width: 85%;
+
+      .input-text {
+        width: 75%;
+      }
+      .input-rating {
+        width: 20%;
+      }
     }
   }
 }

@@ -19,6 +19,7 @@
 </mat-toolbar>
 <div class="employee-profile-container" *ngIf="currentEmployee">
   <h2>Welcome back {{ currentEmployee.name }}!</h2>
+  <h4>Rating: {{ avgRating(currentEmployee.ratings) || 0 }}</h4>
   <img mat-card-image src="{{currentEmployee.image}}" />
   <p>Your peers require your feedback..</p>
   <p *ngIf="!writeReviewFor.length">
@@ -35,31 +36,45 @@
       <div class="employee-panel-container">
         <img mat-card-image src="{{employee.image}}" />
         <div class="text-container">
-          <mat-form-field class="example-full-width">
+          <mat-form-field class="input-text">
             <textarea
               matInput
               placeholder="Provide your feedback"
               [(ngModel)]="employee.feedback.text"
             ></textarea>
           </mat-form-field>
-          <div class="btn-container">
-            <!--
-              <button
-                mat-raised-button
-                color="accent"
-                (click)="submitFeedback(employee, false)"
+          <mat-form-field class="input-rating">
+            <mat-select
+              placeholder="Rating"
+              (selectionChange)="updateRatingByEmployee($event, employee)"
+              [(ngModel)]="employee.employeeRating"
+            >
+              <mat-option
+                *ngFor="let rating of availableRatings"
+                [value]="rating"
               >
-                Save
-              </button>
-            -->
+                {{ rating }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="btn-container">
+          <!--
             <button
               mat-raised-button
-              color="primary"
-              (click)="submitFeedback(employee, true)"
+              color="accent"
+              (click)="submitFeedback(employee, false)"
             >
-              Submit
+              Save
             </button>
-          </div>
+          -->
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="submitFeedback(employee, true)"
+          >
+            Submit
+          </button>
         </div>
       </div>
     </mat-expansion-panel>

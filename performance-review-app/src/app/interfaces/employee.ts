@@ -5,7 +5,7 @@ export interface Employee {
   adminReview: any;
   reviewers: any[];
   feedbacks: any[];
-  ratings: number[];
+  ratings: any[];
   image: string;
   avgRating: number;
 }

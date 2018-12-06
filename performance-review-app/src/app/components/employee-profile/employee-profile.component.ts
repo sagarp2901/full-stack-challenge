@@ -34,11 +34,24 @@ export class EmployeeProfileComponent implements OnInit {
           this.employees.forEach((emp: any) => {
             emp.reviewers.forEach((rev: any) => {
               if (rev._id == this.currentEmployee._id) {
-                emp.employeeReview = { text: "", isSaved: false };
-                emp.employeeRating = "";
                 this.writeReviewFor.push(emp);
               }
             });
+          });
+
+          this.writeReviewFor.forEach(colleague => {
+            if (
+              // if Review is complete or employeeReview does not exist then add a blank object
+              !colleague.employeeReview ||
+              (colleague.employeeReview && colleague.employeeReview.isComplete)
+            ) {
+              colleague.employeeReview = {
+                text: "",
+                isEdit: true,
+                isComplete: false
+              };
+              colleague.employeeRating = "";
+            }
           });
         });
       });
@@ -63,26 +76,18 @@ export class EmployeeProfileComponent implements OnInit {
     }
   }
 
-  submitFeedback(employee, isComplete) {
-    // Find if feedback by this current employee exists.
-    let foundIndex = employee.feedbacks.findIndex(feedback => {
-      return feedback.feedbackId == this.currentEmployee._id;
-    });
+  submitFeedback(employee, isComplete, isEdit) {
+    employee.employeeReview.isComplete = isComplete;
+    employee.employeeReview.isEdit = isEdit;
 
-    // If feedback does not exist or if the feedbacks array is empty then add feedback
-    if (foundIndex == -1) {
+    if (isComplete) {
       employee.feedbacks.push({
         text: employee.employeeReview.text,
         isComplete,
         feedbackId: this.currentEmployee._id,
         feedBackBy: this.currentEmployee.name
       });
-    } else {
-      // Update the feedback if feedback by this current employee does not exist.
-      employee.feedbacks[foundIndex].text = employee.employeeReview.text;
-    }
 
-    if (isComplete) {
       // Remove the employee with completed review from the view
       this.writeReviewFor = this.writeReviewFor.filter(emp => {
         return emp._id !== employee._id;

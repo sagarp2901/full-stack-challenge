@@ -36,13 +36,21 @@
       <div class="employee-panel-container">
         <img mat-card-image src="{{employee.image}}" />
         <div class="text-container">
-          <mat-form-field class="input-text">
+          <mat-form-field
+            class="input-text"
+            *ngIf="employee.employeeReview.isEdit"
+          >
             <textarea
               matInput
               placeholder="Provide your feedback"
               [(ngModel)]="employee.employeeReview.text"
             ></textarea>
           </mat-form-field>
+          <div>
+            <p class="input-text" *ngIf="!employee.employeeReview.isEdit">
+              {{ employee.employeeReview.text }}
+            </p>
+          </div>
           <mat-form-field class="input-rating">
             <mat-select
               placeholder="Rating"
@@ -57,25 +65,31 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-
-          <div class="btn-container">
-            <!--
-              <button
-                mat-raised-button
-                color="accent"
-                (click)="submitFeedback(employee, false)"
-              >
-                Save
-              </button>
-            -->
-            <button
-              mat-raised-button
-              color="primary"
-              (click)="submitFeedback(employee, true)"
-            >
-              Submit
-            </button>
-          </div>
+        </div>
+        <div class="btn-container">
+          <button
+            *ngIf="employee.employeeReview.isEdit"
+            mat-raised-button
+            color="accent"
+            (click)="submitFeedback(employee, false, false)"
+          >
+            Save
+          </button>
+          <button
+            *ngIf="!employee.employeeReview.isEdit"
+            mat-raised-button
+            color="accent"
+            (click)="employee.employeeReview.isEdit = true"
+          >
+            Edit
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="submitFeedback(employee, true, false)"
+          >
+            Submit
+          </button>
         </div>
       </div>
     </mat-expansion-panel>

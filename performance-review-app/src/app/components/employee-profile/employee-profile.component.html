@@ -21,9 +21,9 @@
   <h2>Welcome back {{ currentEmployee.name }}!</h2>
   <h4>Rating: {{ avgRating(currentEmployee.ratings) || 0 }}</h4>
   <img mat-card-image src="{{currentEmployee.image}}" />
-  <p *ngIf="writeReviewFor.length">Your peers require your feedback..</p>
+  <p *ngIf="writeReviewFor.length">Your colleagues require your feedback..</p>
   <p *ngIf="!writeReviewFor.length">
-    Hurrayy!! You do not have any more peers to provide feedback.
+    Hurrayy!! You do not have any more colleagues to provide feedback.
   </p>
 
   <mat-accordion *ngIf="writeReviewFor.length">

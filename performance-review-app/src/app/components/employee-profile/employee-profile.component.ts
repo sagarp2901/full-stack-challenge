@@ -33,7 +33,7 @@ export class EmployeeProfileComponent implements OnInit {
           // Creating a list of employees that require review from this current employee
           this.employees.forEach((emp: any) => {
             emp.reviewers.forEach((rev: any) => {
-              if (rev.name == this.currentEmployee.name) {
+              if (rev._id == this.currentEmployee._id) {
                 emp.employeeReview = { text: "", isSaved: false };
                 emp.employeeRating = "";
                 this.writeReviewFor.push(emp);

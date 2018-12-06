@@ -21,7 +21,7 @@
   <h2>Welcome back {{ currentEmployee.name }}!</h2>
   <h4>Rating: {{ avgRating(currentEmployee.ratings) || 0 }}</h4>
   <img mat-card-image src="{{currentEmployee.image}}" />
-  <p>Your peers require your feedback..</p>
+  <p *ngIf="writeReviewFor.length">Your peers require your feedback..</p>
   <p *ngIf="!writeReviewFor.length">
     Hurrayy!! You do not have any more peers to provide feedback.
   </p>
@@ -57,24 +57,25 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-        </div>
-        <div class="btn-container">
-          <!--
+
+          <div class="btn-container">
+            <!--
+              <button
+                mat-raised-button
+                color="accent"
+                (click)="submitFeedback(employee, false)"
+              >
+                Save
+              </button>
+            -->
             <button
               mat-raised-button
-              color="accent"
-              (click)="submitFeedback(employee, false)"
+              color="primary"
+              (click)="submitFeedback(employee, true)"
             >
-              Save
+              Submit
             </button>
-          -->
-          <button
-            mat-raised-button
-            color="primary"
-            (click)="submitFeedback(employee, true)"
-          >
-            Submit
-          </button>
+          </div>
         </div>
       </div>
     </mat-expansion-panel>

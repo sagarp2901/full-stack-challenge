@@ -69,7 +69,7 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
     // Update checkboxes for already assigned reviewers for this current employee in view
     this.data.employee.reviewers.forEach(rev => {
       this.reviewers.forEach(reviewer => {
-        if (rev.name == reviewer.name) {
+        if (rev._id == reviewer._id) {
           reviewer.selected = true;
         }
       });

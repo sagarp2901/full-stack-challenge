@@ -23,22 +23,6 @@
     ></mat-list-item
   >
 </mat-list>
-<mat-form-field *ngIf="data.mode === 'reviews'">
-  <input matInput placeholder="Add a review" [(ngModel)]="currentReview.text" />
-</mat-form-field>
-<button
-  mat-button
-  color="primary"
-  (click)="saveReview()"
-  *ngIf="data.mode === 'reviews'"
->
-  Add Review
-</button>
-<!--
-  <mat-form-field class="example-full-width">
-    <input #name matInput placeholder="Rating" [(ngModel)]="rating" />
-  </mat-form-field>
--->
 <button *ngIf="data.mode == 'add'" mat-raised-button (click)="createEmployee()">
   Create Employee
 </button>

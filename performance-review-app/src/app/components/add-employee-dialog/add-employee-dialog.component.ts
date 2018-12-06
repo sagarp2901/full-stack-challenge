@@ -40,7 +40,7 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if (this.data.mode == "edit") this.setEditData();
     if (this.data.mode == "reviewer") this.setReviewers();
-    if (this.data.mode == "reviews") this.setReviewers();
+    // if (this.data.mode == "reviews") this.setReviews();
   }
 
   // Set data during edit mode

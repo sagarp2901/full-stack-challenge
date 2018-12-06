@@ -1,23 +1,40 @@
-.example-icon {
-  padding: 0 14px;
-}
-
-.example-spacer {
-  flex: 1 1 auto;
-}
-
 .admin-container {
   background-color: #eeeeee;
-}
+  mat-toolbar {
+    background-color: #1e90ff;
+    color: #ffffff;
 
-.employees-container {
-  app-employee {
+    mat-toolbar-row {
+      padding-left: 0;
+    }
+
+    .example-icon {
+      padding: 0 14px;
+    }
+
+    .example-spacer {
+      flex: 1 1 auto;
+    }
+
+    .add-btn {
+      margin-right: 20px;
+    }
+
+    i {
+      margin-left: 10px;
+    }
   }
 }
 
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 800px) {
   .employees-container {
     padding-left: 100px;
     padding-right: 100px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .employees-container {
+    display: block !important;
   }
 }

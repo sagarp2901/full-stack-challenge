@@ -1,7 +1,29 @@
+mat-toolbar {
+  background-color: #1e90ff;
+  color: #ffffff;
+
+  mat-toolbar-row {
+    padding-left: 0;
+  }
+
+  .example-icon {
+    padding: 0 14px;
+  }
+
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+
+  i {
+    margin-left: 10px;
+    cursor: pointer;
+  }
+}
+
 .employee-profile-container {
-  background-color: rgba(96, 191, 255, 0.486);
-  height: 100%;
+  background-color: #eeeeee;
   padding: 30px;
+  min-width: 100%;
 
   .mat-card-image {
     width: 185px;
@@ -28,10 +50,10 @@
         width: 20%;
       }
     }
+    mat-form-field {
+      width: 100%;
+    }
   }
-}
-.example-full-width {
-  width: 100%;
 }
 
 .btn-container {

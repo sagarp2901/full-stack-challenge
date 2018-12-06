@@ -15,6 +15,9 @@ let Employee = new Schema({
   adminReview: {
     type: Object
   },
+  adminRating: {
+    type: Number
+  },
   feedbacks: {
     type: Array
   },
@@ -24,8 +27,11 @@ let Employee = new Schema({
   ratings: {
     type: Array
   },
-  adminRating: {
+  employeeRating: {
     type: Number
+  },
+  employeeReview: {
+    type: Object
   }
 });
 

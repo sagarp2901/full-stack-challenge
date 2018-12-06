@@ -60,23 +60,18 @@ export class EmployeeComponent implements OnInit {
     // Set an individual rating given by the admin
     employee.adminRating = event.value;
 
-    if (!employee.ratings.length)
+    let foundIndex = employee.ratings.findIndex(rating => {
+      return rating.ratingId == this.adminId;
+    });
+
+    if (foundIndex == -1) {
       employee.ratings.push({
         rating: event.value,
         ratingId: this.adminId
       });
-
-    employee.ratings.forEach(rating => {
-      // IF rating by the admin exists then update it or else create a new rating
-      if (rating.ratingId == this.adminId) {
-        rating.rating = event.value;
-      } else {
-        employee.ratings.push({
-          rating: event.value,
-          ratingId: this.adminId
-        });
-      }
-    });
+    } else {
+      employee.ratings[foundIndex].rating = event.value;
+    }
   }
 
   deleteEmployee(employeeId) {

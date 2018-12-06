@@ -68,6 +68,8 @@ router.route("/employees/update/:id").post((req, res) => {
       employee.ratings = req.body.ratings;
       // Sending admin rating to the db so it can be retrieved again
       employee.adminRating = req.body.adminRating;
+      employee.employeeReview = req.body.employeeReview;
+      employee.employeeRating = req.body.employeeRating;
 
       employee
         .save()

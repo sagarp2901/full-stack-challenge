@@ -12,7 +12,6 @@ export class EmployeeProfileComponent implements OnInit {
   currentEmployee: any;
   employees = [];
   writeReviewFor = [];
-  employeeFeedback = "";
 
   availableRatings = [1, 2, 3, 4, 5];
 
@@ -35,7 +34,8 @@ export class EmployeeProfileComponent implements OnInit {
           this.employees.forEach((emp: any) => {
             emp.reviewers.forEach((rev: any) => {
               if (rev.name == this.currentEmployee.name) {
-                if (!emp.feedback) emp.feedback = { text: "", isSaved: false };
+                emp.employeeReview = { text: "", isSaved: false };
+                emp.employeeRating = "";
                 this.writeReviewFor.push(emp);
               }
             });
@@ -49,36 +49,40 @@ export class EmployeeProfileComponent implements OnInit {
     // Set an individual rating given by this employee
     employee.employeeRating = event.value;
 
-    if (!employee.ratings.length)
+    let foundIndex = employee.ratings.findIndex(rating => {
+      return rating.ratingId == this.currentEmployee._id;
+    });
+
+    if (foundIndex == -1) {
       employee.ratings.push({
         rating: event.value,
         ratingId: this.currentEmployee._id
       });
-
-    employee.ratings.forEach(rating => {
-      // rating by this employee exists then update it or else create a new rating
-      if (rating.ratingId == employee._id) {
-        rating.rating = event.value;
-      } else {
-        employee.ratings.push({
-          rating: event.value,
-          ratingId: this.currentEmployee._id
-        });
-      }
-    });
+    } else {
+      employee.ratings[foundIndex].rating = event.value;
+    }
   }
 
   submitFeedback(employee, isComplete) {
-    // Adding feedback for the employee that needs feedback from this current employee
-    employee.feedbacks.push({
-      text: employee.feedback.text,
-      isComplete,
-      feedbackId: this.currentEmployee._id,
-      feedBackBy: this.currentEmployee.name
+    // Find if feedback by this current employee exists.
+    let foundIndex = employee.feedbacks.findIndex(feedback => {
+      return feedback.feedbackId == this.currentEmployee._id;
     });
 
+    // If feedback does not exist or if the feedbacks array is empty then add feedback
+    if (foundIndex == -1) {
+      employee.feedbacks.push({
+        text: employee.employeeReview.text,
+        isComplete,
+        feedbackId: this.currentEmployee._id,
+        feedBackBy: this.currentEmployee.name
+      });
+    } else {
+      // Update the feedback if feedback by this current employee does not exist.
+      employee.feedbacks[foundIndex].text = employee.employeeReview.text;
+    }
+
     if (isComplete) {
-      // this.employeeFeedback = "";
       // Remove the employee with completed review from the view
       this.writeReviewFor = this.writeReviewFor.filter(emp => {
         return emp._id !== employee._id;

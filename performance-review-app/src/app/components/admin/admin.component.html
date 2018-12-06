@@ -1,0 +1,33 @@
+<div class="admin-container">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <i class="material-icons"> menu </i>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/admin">Admin</button>
+        <button
+          mat-menu-item
+          [routerLink]="['/employee-profile', employee._id]"
+          *ngFor="let employee of employees"
+        >
+          {{ employee.name }}
+        </button>
+      </mat-menu>
+      <span>Performance Review: Admin</span>
+      <span class="example-spacer"></span>
+      <button mat-raised-button (click)="openDialog('add')">
+        Add Employee
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="employees-container">
+    <app-employee
+      *ngFor="let employee of employees; let i = index"
+      [colorIndex]="i"
+      [employee]="employee"
+      [employees]="employees"
+      (employeeUpdated)="getUpdatedEmployees($event)"
+    ></app-employee>
+  </div>
+</div>

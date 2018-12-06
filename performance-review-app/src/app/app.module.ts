@@ -15,22 +15,28 @@ import {
   MatInputModule,
   MatFormFieldModule,
   MatExpansionModule,
-  MatListModule
+  MatListModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatSelectModule,
+  MatMenuModule
 } from "@angular/material";
 import { HomeComponent } from "./components/home/home.component";
 import { EmployeeViewComponent } from "./components/employee-view/employee-view.component";
-import { AdminViewComponent } from "./components/admin-view/admin-view.component";
 import { EmployeeProfileComponent } from "./components/employee-profile/employee-profile.component";
 import { AddEmployeeDialogComponent } from "./components/add-employee-dialog/add-employee-dialog.component";
+import { AdminComponent } from "./components/admin/admin.component";
+import { EmployeeComponent } from "./components/employee/employee.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     EmployeeViewComponent,
-    AdminViewComponent,
     EmployeeProfileComponent,
-    AddEmployeeDialogComponent
+    AddEmployeeDialogComponent,
+    AdminComponent,
+    EmployeeComponent
   ],
   imports: [
     BrowserModule,
@@ -44,9 +50,13 @@ import { AddEmployeeDialogComponent } from "./components/add-employee-dialog/add
     MatCheckboxModule,
     MatDialogModule,
     MatInputModule,
+    MatIconModule,
     MatFormFieldModule,
     MatExpansionModule,
-    MatListModule
+    MatListModule,
+    MatMenuModule,
+    MatSelectModule,
+    MatToolbarModule
   ],
   entryComponents: [AddEmployeeDialogComponent],
   providers: [],

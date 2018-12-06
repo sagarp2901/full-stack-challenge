@@ -1,0 +1,42 @@
+.employee-profile-container {
+  background-color: rgba(96, 191, 255, 0.486);
+  height: 100%;
+  padding: 30px;
+
+  .mat-card-image {
+    width: 185px;
+  }
+
+  .mat-card-image {
+    margin: 0;
+  }
+
+  .employee-panel-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .text-container {
+      width: 85%;
+
+      .input-text {
+        width: 75%;
+        padding-right: 4%;
+      }
+      .input-rating {
+        width: 20%;
+      }
+    }
+  }
+}
+.example-full-width {
+  width: 100%;
+}
+
+.btn-container {
+  display: flex;
+
+  button {
+    margin-right: 20px;
+  }
+}

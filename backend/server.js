@@ -11,7 +11,10 @@ const router = express.Router();
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect("mongodb://localhost:27017/employees");
+//Local
+// mongoose.connect("mongodb://localhost:27017/employees");
+// Mlabs instance
+mongoose.connect("mongodb://dev1:developer1@ds115283.mlab.com:15283/employees");
 
 const connection = mongoose.connection;
 
@@ -38,10 +41,17 @@ router.route("/employees/add").post((req, res) => {
   employee
     .save()
     .then(employee => {
-      res.status(200).json({ employee: "Added successfully" });
+      return Employee.find((err, employees) => {
+        if (err) console.log(err);
+        else {
+          res
+            .status(200)
+            .json({ message: "New Employee Added Successfully", employees });
+        }
+      });
     })
     .catch(err => {
-      res.status(400).send("Falied to create new record");
+      res.status(400).send(err);
     });
 });
 
@@ -50,14 +60,28 @@ router.route("/employees/update/:id").post((req, res) => {
     if (!employee) return next(new Error("Could not load document"));
     else {
       employee.name = req.body.name;
-      employee.rating = req.body.rating;
-      employee.reviews = req.body.reviews;
+      employee.image = req.body.image;
+      employee.title = req.body.title;
+      employee.adminReview = req.body.adminReview;
+      employee.feedbacks = req.body.feedbacks;
       employee.reviewers = req.body.reviewers;
+      employee.ratings = req.body.ratings;
+      // Sending admin rating to the db so it can be retrieved again
+      employee.adminRating = req.body.adminRating;
+      employee.employeeReview = req.body.employeeReview;
+      employee.employeeRating = req.body.employeeRating;
 
       employee
         .save()
         .then(employee => {
-          res.json("Update Complete");
+          return Employee.find((err, employees) => {
+            if (err) console.log(err);
+            else {
+              res
+                .status(200)
+                .json({ message: "Employee Updated Successfully", employees });
+            }
+          });
         })
         .catch(err => {
           res.status(400).send("Update failed");
@@ -66,10 +90,24 @@ router.route("/employees/update/:id").post((req, res) => {
   });
 });
 
-router.route("/employees/delete/:id").get((req, res) => {
+/* router.route("/employees/delete/:id").get((req, res) => {
   Employee.findByIdAndRemove({ _id: req.params.id }, (err, employee) => {
     if (err) res.json(err);
     else res.json("Removed successfully");
+  });
+}); */
+router.route("/employees/delete/:id").get((req, res) => {
+  Employee.findByIdAndRemove({ _id: req.params.id }, (err, employee) => {
+    if (err) res.json(err);
+    else
+      return Employee.find((err, employees) => {
+        if (err) console.log(err);
+        else {
+          res
+            .status(200)
+            .json({ message: "Employee Deleted Successfully", employees });
+        }
+      });
   });
 });
 

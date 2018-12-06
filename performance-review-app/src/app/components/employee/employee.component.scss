@@ -1,0 +1,80 @@
+mat-card {
+  padding: 10px 20px 10px 20px;
+  margin: 10px;
+  border-radius: 15px;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.26);
+  overflow: hidden;
+  position: relative;
+
+  .header {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .icons-container {
+    display: flex;
+    justify-content: space-between;
+
+    i {
+      cursor: pointer;
+    }
+  }
+
+  .employee-container {
+    display: flex;
+    justify-content: space-between;
+
+    .image-avatar {
+      width: 15%;
+      padding-left: 16px;
+
+      .mat-card-image:first-child {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      img {
+        width: 100%;
+      }
+
+      h4 {
+        margin-left: -32px;
+        text-align: center;
+      }
+    }
+
+    .employee-details {
+      width: 85%;
+
+      .review-input-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        .input-text {
+          width: 75%;
+        }
+        .input-rating {
+          width: 20%;
+        }
+      }
+    }
+  }
+
+  .reviewers-container {
+    display: flex;
+
+    .reviewer-card {
+      background-color: rgb(252, 71, 71);
+    }
+
+    button {
+      margin-right: 10px;
+    }
+  }
+
+  .assign-btn {
+    margin-top: 20px;
+  }
+}

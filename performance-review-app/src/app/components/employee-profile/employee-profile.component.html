@@ -1,6 +1,83 @@
-<p>employee-profile works!</p>
-<div *ngIf="profile">{{ profile.name }}</div>
-You can write reviews for your following peers:
-<ul>
-  <li *ngFor="let employee of employees">{{ employee }}</li>
-</ul>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-button [matMenuTriggerFor]="menu">
+      <i class="material-icons"> menu </i>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/admin">Admin</button>
+      <button
+        mat-menu-item
+        [routerLink]="['/employee-profile', employee._id]"
+        *ngFor="let employee of employees"
+      >
+        {{ employee.name }}
+      </button>
+    </mat-menu>
+    <span>Performance Review: Employee</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="employee-profile-container" *ngIf="currentEmployee">
+  <h2>Welcome back {{ currentEmployee.name }}!</h2>
+  <h4>Rating: {{ avgRating(currentEmployee.ratings) || 0 }}</h4>
+  <img mat-card-image src="{{currentEmployee.image}}" />
+  <p *ngIf="writeReviewFor.length">Your peers require your feedback..</p>
+  <p *ngIf="!writeReviewFor.length">
+    Hurrayy!! You do not have any more peers to provide feedback.
+  </p>
+
+  <mat-accordion *ngIf="writeReviewFor.length">
+    <mat-expansion-panel *ngFor="let employee of writeReviewFor">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h4>{{ employee.name }}</h4>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="employee-panel-container">
+        <img mat-card-image src="{{employee.image}}" />
+        <div class="text-container">
+          <mat-form-field class="input-text">
+            <textarea
+              matInput
+              placeholder="Provide your feedback"
+              [(ngModel)]="employee.employeeReview.text"
+            ></textarea>
+          </mat-form-field>
+          <mat-form-field class="input-rating">
+            <mat-select
+              placeholder="Rating"
+              (selectionChange)="updateRatingByEmployee($event, employee)"
+              [(ngModel)]="employee.employeeRating"
+            >
+              <mat-option
+                *ngFor="let rating of availableRatings"
+                [value]="rating"
+              >
+                {{ rating }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="btn-container">
+            <!--
+              <button
+                mat-raised-button
+                color="accent"
+                (click)="submitFeedback(employee, false)"
+              >
+                Save
+              </button>
+            -->
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="submitFeedback(employee, true)"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

@@ -6,14 +6,32 @@ let Employee = new Schema({
   name: {
     type: String
   },
-  rating: {
+  image: {
     type: String
   },
-  reviews: {
+  title: {
+    type: String
+  },
+  adminReview: {
+    type: Object
+  },
+  adminRating: {
+    type: Number
+  },
+  feedbacks: {
     type: Array
   },
   reviewers: {
     type: Array
+  },
+  ratings: {
+    type: Array
+  },
+  employeeRating: {
+    type: Number
+  },
+  employeeReview: {
+    type: Object
   }
 });
 

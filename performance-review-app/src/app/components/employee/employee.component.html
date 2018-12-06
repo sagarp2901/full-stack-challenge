@@ -1,0 +1,129 @@
+<mat-card [style.background-color]="renderColor()">
+  <div class="header">
+    <h3>{{ employee.name }}</h3>
+    <h4>Rating: {{ avgRating(employee.ratings) || 0 }}</h4>
+    <div class="icons-container">
+      <button mat-button (click)="openDialog('edit', employee)">
+        <i class="material-icons edit"> edit </i>
+      </button>
+      <button mat-button (click)="deleteEmployee(employee._id)">
+        <i class="material-icons delete"> delete </i>
+      </button>
+    </div>
+  </div>
+  <div class="employee-container">
+    <div class="image-avatar">
+      <img mat-card-image src="{{employee.image}}" />
+      <h4>{{ employee.title }}</h4>
+    </div>
+    <div class="employee-details">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title> Review </mat-panel-title>
+            <mat-panel-description>
+              <div *ngIf="employee.adminReview.text.length">
+                You can update {{ employee.name }}'s review anytime
+              </div>
+              <div *ngIf="!employee.adminReview.text.length">
+                Write a review for {{ employee.name }}
+              </div>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="review-input-container">
+            <p *ngIf="!employee.adminReview.isEdit" class="input-text">
+              {{ employee.adminReview.text }}
+            </p>
+            <mat-form-field
+              class="input-text"
+              *ngIf="employee.adminReview.isEdit"
+            >
+              <textarea
+                matInput
+                placeholder="Provide your review"
+                [(ngModel)]="employee.adminReview.text"
+              ></textarea>
+            </mat-form-field>
+            <mat-form-field class="input-rating">
+              <mat-select
+                placeholder="Rating"
+                (selectionChange)="updateRatingByAdmin($event, employee)"
+                [(ngModel)]="employee.adminRating"
+              >
+                <mat-option
+                  *ngFor="let rating of availableRatings"
+                  [value]="rating"
+                >
+                  {{ rating }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <button
+            *ngIf="employee.adminReview.isEdit"
+            (click)="updateReview(employee)"
+            mat-raised-button
+          >
+            Save
+          </button>
+          <button
+            *ngIf="!employee.adminReview.isEdit"
+            (click)="employee.adminReview.isEdit = true"
+            mat-raised-button
+          >
+            Edit
+          </button>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Comments</mat-panel-title>
+            <mat-panel-description
+              >Reviews provided by {{ employee.name }}'s
+              colleagues</mat-panel-description
+            >
+          </mat-expansion-panel-header>
+          <mat-list role="list">
+            <mat-list-item
+              role="listitem"
+              *ngFor="let feedback of employee.feedbacks"
+              >{{ feedback.text }}</mat-list-item
+            >
+          </mat-list>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Reviewers</mat-panel-title>
+            <mat-panel-description>
+              <div *ngIf="!employee.reviewers.length">
+                Assign reviewers for {{ employee.name }}
+              </div>
+              <div *ngIf="employee.reviewers.length">
+                {{ employee.name }} has
+                {{ employee.reviewers.length }} reviewer(s).
+              </div>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="reviewers-container" *ngIf="employee.reviewers.length">
+            <mat-card
+              class="reviewer-card"
+              *ngFor="let reviewer of employee.reviewers"
+              mat-raised-button
+              >{{ reviewer.name }}</mat-card
+            >
+          </div>
+          <button
+            class="assign-btn"
+            mat-raised-button
+            color="primary"
+            (click)="openDialog('reviewer', employee)"
+          >
+            {{
+              employee.reviewers.length ? "Update Reviewers" : "Add Reviewers"
+            }}
+          </button>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</mat-card>

@@ -1,5 +1,3 @@
-# Full Stack Developer Challenge
-This is an interview challenge for Paytm Labs. Please feel free to fork. Pull Requests will be ignored.
 ------------------------------------------------------------------------------------------------------------------------------
 # Project Overview
 * The project is based on the MEAN stack technology. 
@@ -22,13 +20,13 @@ This is an interview challenge for Paytm Labs. Please feel free to fork. Pull Re
 # Setup Prerequisites
 
 Install following prerequisites if you do not have them already:
-* Node and NPM: https://nodejs.org/en/ (Check successful installation by running node -v and npm -v in a terminal/cmd)
-* Angular CLI: Run npm install -g @angular/cli in a terminal/cmd
+* Node and NPM: https://nodejs.org/en/ (Check successful installation by running *node -v* and *npm -v* in a terminal/cmd)
+* Angular CLI: Run *npm install -g @angular/cli* in a terminal/cmd
 
 ## Running Node Backend
 
 Navigate to the folder full-stack-challenge/backend and run the following commands in terminal/cmd:
-* *npm install* (Installs the required packages) 
+* *npm install*
 * *npm run dev* (Serves the backend on port 4000)
  
 ## Running Angular Frontend
@@ -45,6 +43,9 @@ Navigate to the folder full-stack-challenge/performance-review-app and run the f
   *	Windows command: *mongo*
 
 ------------------------------------------------------------------------------------------------------------------------------
+# Full Stack Developer Challenge
+This is an interview challenge for Paytm Labs. Please feel free to fork. Pull Requests will be ignored.
+
 ## Requirements
 Design a web application that allows employees to submit feedback toward each other's performance review.
 

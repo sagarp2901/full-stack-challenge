@@ -26,12 +26,12 @@
   </div>
 
   <img mat-card-image src="{{currentEmployee.image}}" />
-  <p *ngIf="writeReviewFor && writeReviewFor.length">
-    Your colleagues require your feedback:
-  </p>
-  <p *ngIf="!writeReviewFor">
+  <h4 *ngIf="writeReviewFor && writeReviewFor.length">
+    Colleagues requiring your feedback:
+  </h4>
+  <h4 *ngIf="!writeReviewFor.length">
     Hurrayy!! You do not have any more colleagues to provide feedback.
-  </p>
+  </h4>
 
   <mat-accordion *ngIf="writeReviewFor && writeReviewFor.length">
     <mat-expansion-panel *ngFor="let employee of writeReviewFor">

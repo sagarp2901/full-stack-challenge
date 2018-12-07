@@ -16,6 +16,7 @@
 * Employee: View list of employees that were provided a feedback.
 * Employee: Submit feedback and the completed feedback will be cleared from the view.
 * Admin and Employee: Give rating to your peers which would show up as average rating for every employee.
+* Switch between Admin view and any of the mocked-logged-in user from the Hamburger menu in nav bar.
 
 # Setup Prerequisites
 

@@ -15,7 +15,7 @@ This is an interview challenge for Paytm Labs. Please feel free to fork. Pull Re
 * Admin: Add/update reviews for each employee.
 * Admin: List of employees that can provide reviews to a particular employee. If a reviewer has already provided a review, it will be indicated and selection of that reviewer for that employee will be disabled allowing admin to keep a track so same reviewer is not assigned to review again.
 * Employee: View list of employees requiring feedbacks with their name, avg. rating and job title.
-* Employee: View list of colleagues that were provided a feedback.
+* Employee: View list of employees that were provided a feedback.
 * Employee: Submit feedback and the completed feedback will be cleared from the view.
 * Admin and Employee: Give rating to your peers which would show up as average rating for every employee.
 

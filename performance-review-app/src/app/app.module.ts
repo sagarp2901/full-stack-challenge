@@ -20,7 +20,8 @@ import {
   MatIconModule,
   MatSelectModule,
   MatSnackBarModule,
-  MatMenuModule
+  MatMenuModule,
+  MatTooltipModule
 } from "@angular/material";
 
 import { EmployeeProfileComponent } from "./components/employee-profile/employee-profile.component";
@@ -55,7 +56,8 @@ import { EmployeeComponent } from "./components/employee/employee.component";
     MatMenuModule,
     MatSelectModule,
     MatSnackBarModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTooltipModule
   ],
   entryComponents: [AddEmployeeDialogComponent],
   providers: [],

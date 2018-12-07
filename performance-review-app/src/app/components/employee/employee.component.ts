@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { Employee } from "src/app/interfaces/employee";
 import { AdminService } from "src/app/services/admin.service";
-import { MatDialog } from "@angular/material";
+import { MatDialog, MatSnackBar } from "@angular/material";
 import { AddEmployeeDialogComponent } from "src/app/components/add-employee-dialog/add-employee-dialog.component";
 
 @Component({
@@ -39,7 +39,11 @@ export class EmployeeComponent implements OnInit {
   // Just creating a unique ID for this admin so that it can be used to identify admin rating
   adminId = "fe7wr6y32898t2";
 
-  constructor(private adminService: AdminService, public dialog: MatDialog) {}
+  constructor(
+    private adminService: AdminService,
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {}
 
@@ -77,6 +81,7 @@ export class EmployeeComponent implements OnInit {
   deleteEmployee(employeeId) {
     this.adminService.deleteEmployee(employeeId).subscribe((data: any) => {
       console.log("Deleted successfully");
+      this.openSnackBar("Employee Deleted !");
       this.employeeUpdated.emit(data.employees);
     });
   }
@@ -84,7 +89,8 @@ export class EmployeeComponent implements OnInit {
   openDialog(mode, employee): void {
     const dialogRef = this.dialog.open(AddEmployeeDialogComponent, {
       data: { mode, employee, employees: this.employees },
-      minWidth: "350px",
+      width: mode == "edit" ? "250px" : "",
+      minWidth: mode == "edit" ? "250px" : "350px",
       maxWidth: "500px",
       maxHeight: "400px"
     });
@@ -104,5 +110,9 @@ export class EmployeeComponent implements OnInit {
       sum = sum + element.rating;
     });
     return Math.floor(sum / ratings.length);
+  }
+
+  openSnackBar(message: string, action?: string) {
+    this.snackBar.open(message, action, { duration: 1600 });
   }
 }

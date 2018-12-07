@@ -21,8 +21,7 @@
       [checked]="reviewer.selected || reviewer.hasReviewed"
       [disabled]="reviewer.hasReviewed"
       >{{ reviewer.name }}
-      {{ reviewer.hasReviewed ? "has already reviewed" : "" }}
-      {{ data.employee.name }}</mat-checkbox
+      {{ reviewer.hasReviewed ? "reviewed already!" : "" }}</mat-checkbox
     >
   </mat-list-item>
 </mat-list>

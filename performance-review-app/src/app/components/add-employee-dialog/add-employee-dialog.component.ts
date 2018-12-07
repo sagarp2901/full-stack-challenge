@@ -101,7 +101,7 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
     this.adminService.addEmployee(this.data.employee).subscribe(data => {
       console.log("Added successfully");
       // Show message at the bottom
-      this.openSnackBar("Employee Created!");
+      this.openSnackBar("Employee Created !");
       this.updateAdminView.emit(data);
     });
     this.dialogRef.close();
@@ -133,7 +133,7 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
     this.adminService.updateEmployee(this.data.employee).subscribe(data => {
       console.log("reviewers Updated successfully");
       // Show message at the bottom
-      this.openSnackBar("Reviewers Assigned");
+      this.openSnackBar("Reviewers Assigned !");
     });
     this.dialogRef.close();
   }
@@ -144,7 +144,7 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
     this.adminService.updateEmployee(this.data.employee).subscribe(data => {
       console.log("Review saved successfully");
       // Show message at the bottom
-      this.openSnackBar("Employee review added!");
+      this.openSnackBar("Employee review added !");
     });
     this.dialogRef.close();
   }

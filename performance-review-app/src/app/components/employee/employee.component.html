@@ -3,10 +3,18 @@
     <h3>{{ employee.name }}</h3>
     <h4>Rating: {{ avgRating(employee.ratings) || 0 }}</h4>
     <div class="icons-container">
-      <button mat-button (click)="openDialog('edit', employee)">
+      <button
+        mat-button
+        matTooltip="Edit Employee"
+        (click)="openDialog('edit', employee)"
+      >
         <i class="material-icons edit"> edit </i>
       </button>
-      <button mat-button (click)="deleteEmployee(employee._id)">
+      <button
+        mat-button
+        matTooltip="Delete Employee"
+        (click)="deleteEmployee(employee._id)"
+      >
         <i class="material-icons delete"> delete </i>
       </button>
     </div>
@@ -20,7 +28,7 @@
       <mat-accordion>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
-            <mat-panel-title> Review </mat-panel-title>
+            <mat-panel-title> Admin Review </mat-panel-title>
             <mat-panel-description>
               <div *ngIf="employee.adminReview.text.length">
                 You can update {{ employee.name }}'s review anytime
@@ -77,7 +85,7 @@
         </mat-expansion-panel>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
-            <mat-panel-title>Comments</mat-panel-title>
+            <mat-panel-title>Colleague Reviews</mat-panel-title>
             <mat-panel-description
               >Reviews provided by {{ employee.name }}'s
               colleagues</mat-panel-description
@@ -93,7 +101,7 @@
         </mat-expansion-panel>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
-            <mat-panel-title>Reviewers</mat-panel-title>
+            <mat-panel-title>Assigned Reviewers</mat-panel-title>
             <mat-panel-description>
               <div *ngIf="!employee.reviewers.length">
                 Assign reviewers for {{ employee.name }}

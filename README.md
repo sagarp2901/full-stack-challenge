@@ -1,6 +1,50 @@
 # Full Stack Developer Challenge
 This is an interview challenge for Paytm Labs. Please feel free to fork. Pull Requests will be ignored.
 ------------------------------------------------------------------------------------------------------------------------------
+# Project Overview
+* The project is based on the MEAN stack technology. 
+* MongoDB instance is setup using Data-as-a-service provided by mlab.com so installing MongoDB locally is not required.
+* Frontend is created using Angular 7, Angular Material, HTML and SCSS.
+* Backend is created using NodeJs, Express and Mongoose.
+
+# App Features
+
+* Admin: View List of employees with cartoon avatars (Can be actual employee images if it’s a future production version).
+* Admin and Employee: Additional details included in views are rating and job title.
+* Admin: Add/update/remove employees.
+* Admin: Add/update reviews for each employee.
+* Admin: List of employees that can provide reviews to a particular employee. If a reviewer has already provided a review, it will be indicated and selection of that reviewer for that employee will be disabled allowing admin to keep a track so same reviewer is not assigned to review again.
+* Employee: View list of employees requiring feedbacks with their name, avg. rating and job title.
+* Employee: View list of colleagues that were provided a feedback.
+* Employee: Submit feedback and the completed feedback will be cleared from the view.
+* Admin and Employee: Give rating to your peers which would show up as average rating for every employee.
+
+# Setup Prerequisites
+
+Install following prerequisites if you do not have them already:
+* Node and NPM: https://nodejs.org/en/ (Check successful installation by running node -v and npm -v in a terminal/cmd)
+* Angular CLI: Run npm install -g @angular/cli in a terminal/cmd
+
+## Running Node Backend
+
+Navigate to the folder full-stack-challenge/backend and run the following commands in terminal/cmd:
+* *npm install* (Installs the required packages) 
+* *npm run dev* (Serves the backend on port 4000)
+ 
+## Running Angular Frontend
+Navigate to the folder full-stack-challenge/performance-review-app and run the following commands in terminal/cmd:
+*	*npm install* 
+*	*ng serve --open* (Serves the frontend app on port 4200 in default browser)
+
+## Setting up the MongoDB database(If not using mlabs)
+* MongoDB is already setup for this project using mlabs as Database-as-a-Service. Following steps can be skipped if local setup is not required.
+* If you need to install locally then visit the [MongoDB Downloads](https://www.mongodb.com/download-center/community?jmp=tutorials&_ga=2.216733855.867775932.1502387021-1711869881.1500135373).
+* Check the [MongoDB Installation](https://docs.mongodb.com/manual/administration/install-community/) documentation to find out the necessary steps for running MongoDB on your machine.
+* After istallation open a new terminal and type the following command to run the local mongoDB instance.
+  * Mac command: *mongod*
+  *	Windows command: *mongo*
+
+------------------------------------------------------------------------------------------------------------------------------
 ## Requirements
 Design a web application that allows employees to submit feedback toward each other's performance review.
 

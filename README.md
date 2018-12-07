@@ -22,8 +22,8 @@ This is an interview challenge for Paytm Labs. Please feel free to fork. Pull Re
 # Setup Prerequisites
 
 Install following prerequisites if you do not have them already:
-* Node and NPM: https://nodejs.org/en/ (Check successful installation by running node -v and npm -v in a terminal/cmd)
-* Angular CLI: Run npm install -g @angular/cli in a terminal/cmd
+* Node and NPM: https://nodejs.org/en/ (Check successful installation by running *node -v* and *npm -v* in a terminal/cmd)
+* Angular CLI: Run *npm install -g @angular/cli* in a terminal/cmd
 
 ## Running Node Backend
 

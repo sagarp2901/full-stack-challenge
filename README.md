@@ -28,7 +28,7 @@ Install following prerequisites if you do not have them already:
 ## Running Node Backend
 
 Navigate to the folder full-stack-challenge/backend and run the following commands in terminal/cmd:
-* *npm install* (Installs the required packages) 
+* *npm install*
 * *npm run dev* (Serves the backend on port 4000)
  
 ## Running Angular Frontend

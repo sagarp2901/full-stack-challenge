@@ -18,17 +18,26 @@
     ><mat-checkbox
       [value]="reviewer.name"
       (change)="selectReviewer(reviewer)"
-      [checked]="reviewer.selected"
-      >{{ reviewer.name }}</mat-checkbox
-    ></mat-list-item
-  >
+      [checked]="reviewer.selected || reviewer.hasReviewed"
+      [disabled]="reviewer.hasReviewed"
+      >{{ reviewer.name }}
+      {{ reviewer.hasReviewed ? "has already reviewed" : "" }}
+      {{ data.employee.name }}</mat-checkbox
+    >
+  </mat-list-item>
 </mat-list>
-<button *ngIf="data.mode == 'add'" mat-raised-button (click)="createEmployee()">
+<button
+  *ngIf="data.mode == 'add'"
+  mat-raised-button
+  color="primary"
+  (click)="createEmployee()"
+>
   Create Employee
 </button>
 <button
   *ngIf="data.mode == 'edit'"
   mat-raised-button
+  color="primary"
   (click)="updateEmployee()"
 >
   Update Employee
@@ -36,6 +45,7 @@
 <button
   *ngIf="data.mode == 'reviewer'"
   mat-raised-button
+  color="primary"
   (click)="assignReviewers()"
 >
   Add Reviewers

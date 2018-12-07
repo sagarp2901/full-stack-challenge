@@ -19,6 +19,7 @@ import {
   MatToolbarModule,
   MatIconModule,
   MatSelectModule,
+  MatSnackBarModule,
   MatMenuModule
 } from "@angular/material";
 
@@ -53,6 +54,7 @@ import { EmployeeComponent } from "./components/employee/employee.component";
     MatListModule,
     MatMenuModule,
     MatSelectModule,
+    MatSnackBarModule,
     MatToolbarModule
   ],
   entryComponents: [AddEmployeeDialogComponent],

@@ -5,7 +5,7 @@ import {
   Inject,
   EventEmitter
 } from "@angular/core";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from "@angular/material";
 import { AdminService } from "../../services/admin.service";
 import * as toonAvatar from "cartoon-avatar";
 
@@ -18,7 +18,8 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private adminService: AdminService,
-    public dialogRef: MatDialogRef<AddEmployeeDialogComponent>
+    public dialogRef: MatDialogRef<AddEmployeeDialogComponent>,
+    public snackBar: MatSnackBar
   ) {}
 
   reviews;
@@ -62,8 +63,13 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
     this.reviewers = [];
     // Get all the employee names except the one thats being assigned reviewers to avoid writing self reviews
     this.data.employees.forEach(emp => {
-      if (emp.name !== this.data.employee.name)
-        this.reviewers.push({ _id: emp._id, name: emp.name, selected: false });
+      if (emp._id !== this.data.employee._id)
+        this.reviewers.push({
+          _id: emp._id,
+          name: emp.name,
+          selected: false,
+          hasReviewed: false
+        });
     });
 
     // Update checkboxes for already assigned reviewers for this current employee in view
@@ -71,6 +77,15 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
       this.reviewers.forEach(reviewer => {
         if (rev._id == reviewer._id) {
           reviewer.selected = true;
+        }
+      });
+    });
+
+    // Mark reviewer as has reviewed so this reviewer can be disabled from adding a review again.
+    this.data.employee.feedbacks.forEach(feedback => {
+      this.reviewers.forEach(rev => {
+        if (rev._id == feedback.feedbackId) {
+          rev.hasReviewed = true;
         }
       });
     });
@@ -85,6 +100,8 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
     this.data.employee.image = toonAvatar.generate_avatar();
     this.adminService.addEmployee(this.data.employee).subscribe(data => {
       console.log("Added successfully");
+      // Show message at the bottom
+      this.openSnackBar("Employee Created!");
       this.updateAdminView.emit(data);
     });
     this.dialogRef.close();
@@ -95,6 +112,8 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
     this.data.employee.title = this.employee.title;
     this.adminService.updateEmployee(this.data.employee).subscribe(data => {
       console.log("Updated successfully");
+      // Show message at the bottom
+      this.openSnackBar("Employee Updated!");
       this.updateAdminView.emit(data);
     });
     this.dialogRef.close();
@@ -106,12 +125,15 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
   }
 
   assignReviewers() {
+    // Filter out the reviewers that have already reviewed.
     this.data.employee.reviewers = this.reviewers.filter(rev => {
-      return rev.selected;
+      return rev.selected && !rev.hasReviewed;
     });
 
     this.adminService.updateEmployee(this.data.employee).subscribe(data => {
       console.log("reviewers Updated successfully");
+      // Show message at the bottom
+      this.openSnackBar("Reviewers Assigned");
     });
     this.dialogRef.close();
   }
@@ -121,8 +143,14 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
     this.data.employee.adminReview = this.employee.adminReview;
     this.adminService.updateEmployee(this.data.employee).subscribe(data => {
       console.log("Review saved successfully");
+      // Show message at the bottom
+      this.openSnackBar("Employee review added!");
     });
     this.dialogRef.close();
+  }
+
+  openSnackBar(message: string, action?: string) {
+    this.snackBar.open(message, action, { duration: 1600 });
   }
 
   ngOnDestroy() {}

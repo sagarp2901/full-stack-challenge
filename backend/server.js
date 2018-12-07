@@ -5,23 +5,29 @@ import mongoose from "mongoose";
 
 import Employee from "./models/Employee";
 
+// Create a new express app
 const app = express();
 const router = express.Router();
 
+// Allow cors
 app.use(cors());
+
+// Use json body parser
 app.use(bodyParser.json());
 
-//Local
+// If using a local installation of mongoDB
 // mongoose.connect("mongodb://localhost:27017/employees");
-// Mlabs instance
+
+// Current project database on Mlabs instance
 mongoose.connect("mongodb://dev1:developer1@ds115283.mlab.com:15283/employees");
 
+// Create and open a mongoDB connection
 const connection = mongoose.connection;
-
 connection.once("open", () => {
   console.log("MongoDB connection established successfully");
 });
 
+// Get all employees
 router.route("/employees").get((req, res) => {
   Employee.find((err, employees) => {
     if (err) console.log(err);
@@ -29,6 +35,7 @@ router.route("/employees").get((req, res) => {
   });
 });
 
+// Get employee by id
 router.route("/employees/:id").get((req, res) => {
   Employee.findById(req.params.id, (err, employee) => {
     if (err) console.log(err);
@@ -36,6 +43,7 @@ router.route("/employees/:id").get((req, res) => {
   });
 });
 
+// Add an employee
 router.route("/employees/add").post((req, res) => {
   let employee = new Employee(req.body);
   employee
@@ -55,6 +63,7 @@ router.route("/employees/add").post((req, res) => {
     });
 });
 
+// Update employee by Id
 router.route("/employees/update/:id").post((req, res) => {
   Employee.findById(req.params.id, (err, employee) => {
     if (!employee) return next(new Error("Could not load document"));
@@ -90,12 +99,7 @@ router.route("/employees/update/:id").post((req, res) => {
   });
 });
 
-/* router.route("/employees/delete/:id").get((req, res) => {
-  Employee.findByIdAndRemove({ _id: req.params.id }, (err, employee) => {
-    if (err) res.json(err);
-    else res.json("Removed successfully");
-  });
-}); */
+// Delete employee by id
 router.route("/employees/delete/:id").get((req, res) => {
   Employee.findByIdAndRemove({ _id: req.params.id }, (err, employee) => {
     if (err) res.json(err);
@@ -113,4 +117,5 @@ router.route("/employees/delete/:id").get((req, res) => {
 
 app.use("/", router);
 
+// Server listen on port 4000
 app.listen(4000, () => console.log("Express server is running on port 4000"));

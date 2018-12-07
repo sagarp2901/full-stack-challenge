@@ -30,6 +30,7 @@ export class EmployeeProfileComponent implements OnInit {
         this.adminService.getEmployees().subscribe((data: []) => {
           this.employees = data;
 
+          this.writeReviewFor = [];
           // Creating a list of employees that require review from this current employee
           this.employees.forEach((emp: any) => {
             emp.reviewers.forEach((rev: any) => {
@@ -39,19 +40,14 @@ export class EmployeeProfileComponent implements OnInit {
             });
           });
 
+          // Adding an empty review field.
           this.writeReviewFor.forEach(colleague => {
-            if (
-              // if Review is complete or employeeReview does not exist then add a blank object
-              !colleague.employeeReview ||
-              (colleague.employeeReview && colleague.employeeReview.isComplete)
-            ) {
-              colleague.employeeReview = {
-                text: "",
-                isEdit: true,
-                isComplete: false
-              };
-              colleague.employeeRating = "";
-            }
+            colleague.employeeReview = {
+              text: "",
+              isEdit: true,
+              isComplete: false
+            };
+            colleague.employeeRating = "";
           });
         });
       });
@@ -76,28 +72,22 @@ export class EmployeeProfileComponent implements OnInit {
     }
   }
 
-  submitFeedback(employee, isComplete, isEdit) {
-    employee.employeeReview.isComplete = isComplete;
-    employee.employeeReview.isEdit = isEdit;
+  submitFeedback(employee) {
+    employee.feedbacks.push({
+      text: employee.employeeReview.text,
+      feedbackId: this.currentEmployee._id,
+      feedBackBy: this.currentEmployee.name
+    });
 
-    if (isComplete) {
-      employee.feedbacks.push({
-        text: employee.employeeReview.text,
-        isComplete,
-        feedbackId: this.currentEmployee._id,
-        feedBackBy: this.currentEmployee.name
-      });
+    // Remove the employee with completed review from the view
+    this.writeReviewFor = this.writeReviewFor.filter(emp => {
+      return emp._id !== employee._id;
+    });
 
-      // Remove the employee with completed review from the view
-      this.writeReviewFor = this.writeReviewFor.filter(emp => {
-        return emp._id !== employee._id;
-      });
-
-      // Remove the reviewer from this person's database entry whose review is complete
-      employee.reviewers = employee.reviewers.filter(rev => {
-        return rev._id !== this.currentEmployee._id;
-      });
-    }
+    // Remove the reviewer from this person's database entry whose review is complete
+    employee.reviewers = employee.reviewers.filter(rev => {
+      return rev._id !== this.currentEmployee._id;
+    });
 
     this.adminService.updateEmployee(employee).subscribe(data => {
       console.log("Feedback Saved successfully");

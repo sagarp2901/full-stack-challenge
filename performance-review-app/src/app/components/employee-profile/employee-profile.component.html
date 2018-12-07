@@ -38,12 +38,7 @@
         <img mat-card-image src="{{employee.image}}" />
         <div class="text-container">
           <div class="input-text">
-            <div>
-              <p class="input-text" *ngIf="!employee.employeeReview.isEdit">
-                {{ employee.employeeReview.text }}
-              </p>
-            </div>
-            <mat-form-field *ngIf="employee.employeeReview.isEdit">
+            <mat-form-field>
               <textarea
                 matInput
                 placeholder="Provide your feedback"
@@ -52,25 +47,9 @@
             </mat-form-field>
             <div class="btn-container">
               <button
-                *ngIf="employee.employeeReview.isEdit"
-                mat-raised-button
-                color="accent"
-                (click)="submitFeedback(employee, false, false)"
-              >
-                Save
-              </button>
-              <button
-                *ngIf="!employee.employeeReview.isEdit"
-                mat-raised-button
-                color="accent"
-                (click)="employee.employeeReview.isEdit = true"
-              >
-                Edit
-              </button>
-              <button
                 mat-raised-button
                 color="primary"
-                (click)="submitFeedback(employee, true, false)"
+                (click)="submitFeedback(employee)"
               >
                 Submit
               </button>

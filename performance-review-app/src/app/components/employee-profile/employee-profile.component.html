@@ -29,7 +29,7 @@
   <h4 *ngIf="writeReviewFor && writeReviewFor.length">
     Colleagues requiring your feedback:
   </h4>
-  <h4 *ngIf="!writeReviewFor.length">
+  <h4 *ngIf="writeReviewFor && !writeReviewFor.length">
     Hurrayy!! You do not have any more colleagues to provide feedback.
   </h4>
 

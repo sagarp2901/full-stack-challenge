@@ -36,7 +36,7 @@ Navigate to the folder full-stack-challenge/performance-review-app and run the f
 *	*npm install* 
 *	*ng serve --open* (Serves the frontend app on port 4200 in default browser)
 
-## Setting up the MongoDB database(If not using mlabs)
+## Setting up the MongoDB (If not using mlabs)
 * MongoDB is already setup for this project using mlabs as Database-as-a-Service. Following steps can be skipped if local setup is not required.
 * If you need to install locally then visit the [MongoDB Downloads](https://www.mongodb.com/download-center/community?jmp=tutorials&_ga=2.216733855.867775932.1502387021-1711869881.1500135373).
 * Check the [MongoDB Installation](https://docs.mongodb.com/manual/administration/install-community/) documentation to find out the necessary steps for running MongoDB on your machine.

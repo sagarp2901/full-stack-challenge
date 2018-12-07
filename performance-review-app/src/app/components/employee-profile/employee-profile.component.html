@@ -20,9 +20,13 @@
 </mat-toolbar>
 <div class="employee-profile-container" *ngIf="currentEmployee">
   <h2>Welcome back {{ currentEmployee.name }}!</h2>
-  <h4>Rating: {{ avgRating(currentEmployee.ratings) || 0 }}</h4>
+  <div class="current-employee-stats">
+    <h4>Job Title: {{ currentEmployee.title }}</h4>
+    <h4>Rating: {{ avgRating(currentEmployee.ratings) || 0 }}</h4>
+  </div>
+
   <img mat-card-image src="{{currentEmployee.image}}" />
-  <p *ngIf="writeReviewFor.length">Your colleagues require your feedback..</p>
+  <p *ngIf="writeReviewFor.length">Your colleagues require your feedback:</p>
   <p *ngIf="!writeReviewFor.length">
     Hurrayy!! You do not have any more colleagues to provide feedback.
   </p>
@@ -30,9 +34,10 @@
   <mat-accordion *ngIf="writeReviewFor.length">
     <mat-expansion-panel *ngFor="let employee of writeReviewFor">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          <h4>{{ employee.name }}</h4>
+        <mat-panel-title
+          ><strong> {{ employee.name }}</strong>
         </mat-panel-title>
+        <mat-panel-description> {{ employee.title }}</mat-panel-description>
       </mat-expansion-panel-header>
       <div class="employee-panel-container">
         <img mat-card-image src="{{employee.image}}" />

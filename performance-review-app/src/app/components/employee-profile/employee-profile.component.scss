@@ -23,7 +23,21 @@ mat-toolbar {
 .employee-profile-container {
   background-color: #eeeeee;
   padding: 30px;
-  min-width: 100%;
+  min-height: 100%;
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .current-employee-stats {
+    display: flex;
+    justify-content: flex-start;
+
+    h4 {
+      margin-right: 40px;
+    }
+  }
 
   .mat-card-image {
     width: 185px;

@@ -73,6 +73,7 @@ export class EmployeeProfileComponent implements OnInit {
   }
 
   submitFeedback(employee) {
+    // Push the new feedback to the feedbacks
     employee.feedbacks.push({
       text: employee.employeeReview.text,
       feedbackId: this.currentEmployee._id,

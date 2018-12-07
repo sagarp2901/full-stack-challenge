@@ -153,5 +153,11 @@ export class AddEmployeeDialogComponent implements OnInit, OnDestroy {
     this.snackBar.open(message, action, { duration: 1600 });
   }
 
+  hasAllReviewed() {
+    // disable the Add Review button if all reviewers have finished their review.
+    return this.reviewers.every(rev => {
+      return rev.hasReviewed;
+    });
+  }
   ngOnDestroy() {}
 }

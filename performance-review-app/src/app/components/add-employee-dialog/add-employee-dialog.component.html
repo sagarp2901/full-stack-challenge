@@ -46,6 +46,7 @@
   mat-raised-button
   color="primary"
   (click)="assignReviewers()"
+  [disabled]="hasAllReviewed()"
 >
   Add Reviewers
 </button>

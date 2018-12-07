@@ -21,13 +21,15 @@ import {
   MatSelectModule,
   MatSnackBarModule,
   MatMenuModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatTableModule
 } from "@angular/material";
 
 import { EmployeeProfileComponent } from "./components/employee-profile/employee-profile.component";
 import { AddEmployeeDialogComponent } from "./components/add-employee-dialog/add-employee-dialog.component";
 import { AdminComponent } from "./components/admin/admin.component";
 import { EmployeeComponent } from "./components/employee/employee.component";
+import { TableComponent } from "./components/common/table/table.component";
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { EmployeeComponent } from "./components/employee/employee.component";
     EmployeeProfileComponent,
     AddEmployeeDialogComponent,
     AdminComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,8 @@ import { EmployeeComponent } from "./components/employee/employee.component";
     MatSelectModule,
     MatSnackBarModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatTableModule
   ],
   entryComponents: [AddEmployeeDialogComponent],
   providers: [],

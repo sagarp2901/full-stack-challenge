@@ -91,13 +91,19 @@
               colleagues</mat-panel-description
             >
           </mat-expansion-panel-header>
-          <mat-list role="list">
-            <mat-list-item
-              role="listitem"
-              *ngFor="let feedback of employee.feedbacks"
-              >{{ feedback.text }}</mat-list-item
-            >
-          </mat-list>
+          <!--
+            <mat-list role="list">
+              <mat-list-item
+                role="listitem"
+                *ngFor="let feedback of employee.feedbacks"
+                >{{ feedback.text }}</mat-list-item
+              >
+            </mat-list>
+          -->
+          <app-table
+            [feedbacks]="employee.feedbacks"
+            [displayedColumns]="['feedBackBy', 'text']"
+          ></app-table>
         </mat-expansion-panel>
         <mat-expansion-panel>
           <mat-expansion-panel-header>

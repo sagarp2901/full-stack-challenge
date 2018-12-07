@@ -1,5 +1,3 @@
-# Full Stack Developer Challenge
-This is an interview challenge for Paytm Labs. Please feel free to fork. Pull Requests will be ignored.
 ------------------------------------------------------------------------------------------------------------------------------
 # Project Overview
 * The project is based on the MEAN stack technology. 
@@ -45,6 +43,9 @@ Navigate to the folder full-stack-challenge/performance-review-app and run the f
   *	Windows command: *mongo*
 
 ------------------------------------------------------------------------------------------------------------------------------
+# Full Stack Developer Challenge
+This is an interview challenge for Paytm Labs. Please feel free to fork. Pull Requests will be ignored.
+
 ## Requirements
 Design a web application that allows employees to submit feedback toward each other's performance review.
 

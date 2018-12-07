@@ -11,6 +11,15 @@ export class TableComponent implements OnInit {
 
   @Input() displayedColumns;
   dataSource = this.feedbacks;
+
+  titles = {
+    employeeName: "Employee Name",
+    employeeTitle: "Employee Title",
+    employeeRating: "Rating",
+    feedback: "Review",
+    feedBackBy: "Name",
+    text: "Review"
+  };
   constructor() {}
 
   ngOnInit() {}

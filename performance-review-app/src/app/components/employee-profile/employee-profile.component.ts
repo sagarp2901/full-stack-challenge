@@ -11,7 +11,9 @@ export class EmployeeProfileComponent implements OnInit {
   id: string;
   currentEmployee: any;
   employees = [];
-  writeReviewFor = [];
+  writeReviewFor;
+
+  reviewsByYou;
 
   availableRatings = [1, 2, 3, 4, 5];
 
@@ -48,6 +50,21 @@ export class EmployeeProfileComponent implements OnInit {
               isComplete: false
             };
             colleague.employeeRating = "";
+          });
+
+          // Reviews given by Han
+          this.reviewsByYou = [];
+          this.employees.forEach(emp => {
+            emp.feedbacks.forEach(feedback => {
+              if (feedback.feedbackId == this.currentEmployee._id) {
+                this.reviewsByYou.push({
+                  employeeName: emp.name,
+                  employeeTitle: emp.title,
+                  employeeRating: emp.employeeRating,
+                  feedback: feedback.text
+                });
+              }
+            });
           });
         });
       });

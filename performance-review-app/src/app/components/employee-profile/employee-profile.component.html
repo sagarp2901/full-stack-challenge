@@ -26,12 +26,14 @@
   </div>
 
   <img mat-card-image src="{{currentEmployee.image}}" />
-  <p *ngIf="writeReviewFor.length">Your colleagues require your feedback:</p>
-  <p *ngIf="!writeReviewFor.length">
+  <p *ngIf="writeReviewFor && writeReviewFor.length">
+    Your colleagues require your feedback:
+  </p>
+  <p *ngIf="!writeReviewFor">
     Hurrayy!! You do not have any more colleagues to provide feedback.
   </p>
 
-  <mat-accordion *ngIf="writeReviewFor.length">
+  <mat-accordion *ngIf="writeReviewFor && writeReviewFor.length">
     <mat-expansion-panel *ngFor="let employee of writeReviewFor">
       <mat-expansion-panel-header>
         <mat-panel-title
@@ -79,4 +81,14 @@
       </div>
     </mat-expansion-panel>
   </mat-accordion>
+  <h4>Reviews By You:</h4>
+  <app-table
+    [feedbacks]="reviewsByYou"
+    [displayedColumns]="[
+      'employeeName',
+      'employeeTitle',
+      'feedback',
+      'employeeRating'
+    ]"
+  ></app-table>
 </div>

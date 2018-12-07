@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { AdminService } from "../../services/admin.service";
+import { MatSnackBar } from "@angular/material";
 
 @Component({
   selector: "app-employee-profile",
@@ -19,7 +20,8 @@ export class EmployeeProfileComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private adminService: AdminService
+    private adminService: AdminService,
+    public snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -28,46 +30,37 @@ export class EmployeeProfileComponent implements OnInit {
       // Get current logged in employee
       this.adminService.getEmployeeById(this.id).subscribe(data => {
         this.currentEmployee = data;
-        // Get list of all the employees to find out which employee needs feedback from the current employee
-        this.adminService.getEmployees().subscribe((data: []) => {
-          this.employees = data;
+        // Get all the employees to find out which employee needs feedback from the current employee
+        this.updateEmployeesNeedingReview();
+      });
+    });
+  }
 
-          this.writeReviewFor = [];
-          // Creating a list of employees that require review from this current employee
-          this.employees.forEach((emp: any) => {
-            emp.reviewers.forEach((rev: any) => {
-              if (rev._id == this.currentEmployee._id) {
-                this.writeReviewFor.push(emp);
-              }
-            });
-          });
+  updateEmployeesNeedingReview() {
+    this.adminService.getEmployees().subscribe((data: []) => {
+      this.employees = data;
 
-          // Adding an empty review field.
-          this.writeReviewFor.forEach(colleague => {
-            colleague.employeeReview = {
-              text: "",
-              isEdit: true,
-              isComplete: false
-            };
-            colleague.employeeRating = "";
-          });
-
-          // Reviews given by Han
-          this.reviewsByYou = [];
-          this.employees.forEach(emp => {
-            emp.feedbacks.forEach(feedback => {
-              if (feedback.feedbackId == this.currentEmployee._id) {
-                this.reviewsByYou.push({
-                  employeeName: emp.name,
-                  employeeTitle: emp.title,
-                  employeeRating: emp.employeeRating,
-                  feedback: feedback.text
-                });
-              }
-            });
-          });
+      this.writeReviewFor = [];
+      // Creating a list of employees that require review from this current employee
+      this.employees.forEach((emp: any) => {
+        emp.reviewers.forEach((rev: any) => {
+          if (rev._id == this.currentEmployee._id) {
+            this.writeReviewFor.push(emp);
+          }
         });
       });
+
+      // Adding an empty review field.
+      this.writeReviewFor.forEach(colleague => {
+        colleague.employeeReview = {
+          text: "",
+          isEdit: true,
+          isComplete: false
+        };
+        colleague.employeeRating = "";
+      });
+
+      this.updateReviewsByThisUser();
     });
   }
 
@@ -109,6 +102,25 @@ export class EmployeeProfileComponent implements OnInit {
 
     this.adminService.updateEmployee(employee).subscribe(data => {
       console.log("Feedback Saved successfully");
+      this.openSnackBar("Review saved successfully !");
+      this.updateReviewsByThisUser();
+    });
+  }
+
+  updateReviewsByThisUser() {
+    // Reviews given by current user
+    this.reviewsByYou = [];
+    this.employees.forEach(emp => {
+      emp.feedbacks.forEach(feedback => {
+        if (feedback.feedbackId == this.currentEmployee._id) {
+          this.reviewsByYou.push({
+            employeeName: emp.name,
+            employeeTitle: emp.title,
+            employeeRating: emp.employeeRating,
+            feedback: feedback.text
+          });
+        }
+      });
     });
   }
 
@@ -118,5 +130,9 @@ export class EmployeeProfileComponent implements OnInit {
       sum = sum + element.rating;
     });
     return Math.floor(sum / ratings.length);
+  }
+
+  openSnackBar(message: string, action?: string) {
+    this.snackBar.open(message, action, { duration: 1600 });
   }
 }

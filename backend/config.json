@@ -1,0 +1,4 @@
+{
+  "connectionString": "mongodb://dev1:developer1@ds139267.mlab.com:39267/tiffins",
+  "secret": "THIS IS mu jwt toekn to above and beyond. haha hah hahaha"
+}

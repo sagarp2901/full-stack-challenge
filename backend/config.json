@@ -1,4 +1,4 @@
 {
-  "connectionString": "mongodb://dev1:developer1@ds139267.mlab.com:39267/tiffins",
+  "connectionString": "mongodb://admin:adminrenter1@ds229290.mlab.com:29290/renterone",
   "secret": "THIS IS mu jwt toekn to above and beyond. haha hah hahaha"
 }
